@@ -40,11 +40,7 @@ namespace AgroMap
             list_view_events.ItemTemplate = new DataTemplate(() => {return new EventCell(this); });
             Command RefreshListCommand = new Command(() => LoadEvents());
             list_view_events.RefreshCommand = RefreshListCommand;
-
-
         }
-
-        
 
         private async void LoadEvents() 
         {
