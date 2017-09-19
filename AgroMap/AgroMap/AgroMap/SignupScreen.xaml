@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgroMap.SignupScreen">
+    <ContentPage.Content>
+        <StackLayout
+            Orientation="Vertical"
+            Padding="10">
+            <Label x:Name="lbl_login"
+                   HorizontalOptions="Center"
+                   FontSize="Large"
+                   />
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="FillAndExpand"
+                Padding="0"
+                >
+                <Label x:Name="lbl_name_signup"
+                       VerticalOptions="Center"
+                       FontSize="Medium"
+                       />
+                <Entry x:Name="ent_name_signup"
+                       HorizontalOptions="FillAndExpand"
+                       />
+            </StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="FillAndExpand"
+                Padding="0"
+                >
+                <Label x:Name="lbl_last_name_signup"
+                       VerticalOptions="Center"
+                       FontSize="Medium"
+                       />
+                <Entry x:Name="ent_last_name_signup"
+                       HorizontalOptions="FillAndExpand"
+                       />
+            </StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="FillAndExpand"
+                Padding="0"
+                >
+                <Label x:Name="lbl_email_signup"
+                       VerticalOptions="Center"
+                       FontSize="Medium"
+                       />
+                <Entry x:Name="ent_email_signup"
+                       HorizontalOptions="FillAndExpand"
+                       />
+            </StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="FillAndExpand"
+                Padding="0"
+                >
+                <Label x:Name="lbl_password_signup"
+                       VerticalOptions="Center"
+                       FontSize="Medium"
+                       />
+                <Entry x:Name="ent_password_signup"
+                       HorizontalOptions="FillAndExpand"
+                       IsPassword="True"
+                       />
+            </StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="FillAndExpand"
+                Padding="0"
+                >
+                <Button x:Name="btn_back_signup"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="btn_back_signup_Clicked"
+                        />
+                <Button x:Name="btn_send_signup"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="btn_send_signup_Clicked"
+                        />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

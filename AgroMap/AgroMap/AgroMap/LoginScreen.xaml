@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgroMap.LoginScreen">
+    <ContentPage.Content>
+        <StackLayout
+            Orientation="Vertical">
+            <ActivityIndicator x:Name="actIndLogin" Color="Red" IsRunning="false" IsVisible="False" />
+            <StackLayout x:Name="login_itens">
+                <Image x:Name="img_login" WidthRequest="200"/>
+                <Entry x:Name="txt_email_login" Placeholder="Email"/>
+                <Entry x:Name="txt_pass_login" Placeholder="Password" IsPassword="True"/>
+                <Button Text="Sign In" x:Name="btn_signin_login" Clicked="btn_signin_login_Clicked"/>
+                <Button Text="Sign Up" x:Name="btn_signup_login" Clicked="btn_signup_login_Clicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

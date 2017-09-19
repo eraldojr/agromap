@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgroMap.InspectionScreen">
+    <ContentPage.Content>
+        <StackLayout
+            Orientation="Vertical"
+            Padding="5"
+            >
+            <Label x:Name="lbl_inspections"
+                   HorizontalOptions="FillAndExpand"
+                   FontSize="25"
+                   HorizontalTextAlignment="Center"/>
+            <StackLayout x:Name="super_options"/>
+            <StackLayout x:Name="main_layout">
+                <ListView x:Name="list_view_inspections"
+                          IsPullToRefreshEnabled="True">
+                    <ListView.Header>
+                        <StackLayout HeightRequest="0" />
+                    </ListView.Header>
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <StackLayout HeightRequest="0" />
+                    </ListView.Footer>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

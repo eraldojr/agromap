@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgroMap.EventListScreen"
+             >
+    <ContentPage.Content>
+        <StackLayout
+            Orientation="Vertical"
+            Padding="5">
+            <Label x:Name="lbl_events"
+                   HorizontalOptions="FillAndExpand"
+                   FontSize="25"
+                   HorizontalTextAlignment="Center"/>
+            <StackLayout
+                Orientation="Horizontal">
+                <Label x:Name="lbl_inspection_id" />
+                <Label x:Name="lbl_id"/>
+            </StackLayout>
+            <Label x:Name="lbl_inspection_name" />            
+            <ListView x:Name="list_view_events"
+                          IsPullToRefreshEnabled="True">
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
