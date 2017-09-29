@@ -8,12 +8,11 @@ namespace AgroMap.Entity
 {
     public class Inspection
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string CreatedAt { get; set; }
-        public DateTime Start_At { get; set; }
-        public DateTime End_At { get; set; }
-        public int Supervisor { get; set; }
-        public List<int> Members { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string created_at { get; set; }
+        public DateTime start_at { get; set; }
+        public DateTime end_at { get; set; }
+        public int supervisor { get; set; }
     }
 }

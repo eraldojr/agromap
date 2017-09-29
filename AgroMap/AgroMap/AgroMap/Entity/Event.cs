@@ -9,14 +9,15 @@ namespace AgroMap.Entity
     public class Event
     {
         
-        public int Id { get; set; }
-        public int User { get; set; }
-        public int Inspection { get; set; }
-        public string Description { get; set; }
-        public string Typeof { get; set; }
-        public DateTime Created_at { get; set; }
-        public DateTime Last_edit_at { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        public int id { get; set; }
+        public int user { get; set; }
+        public int inspection { get; set; }
+        public string description { get; set; }
+        public string types { get; set; }
+        public DateTime created_at { get; set; }
+        public DateTime last_edit_at { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
+        public int synced { get; set; } = 0;
     }
 }

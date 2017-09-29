@@ -26,7 +26,7 @@ namespace AgroMap
         {
             event_list_content_page.Content = new EventListScreen(this).Content;
             event_map_content_page.Content = new MapEventScreen().Content;
-            event_new_content_page.Content = new NewEventScreen().Content;
+            event_new_content_page.Content = new NewEventScreen(inspection.id).Content;
         }
     }
 }

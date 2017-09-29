@@ -1,7 +1,9 @@
-﻿using AgroMap.Entity;
+﻿using AgroMap.Database;
+using AgroMap.Entity;
 using AgroMap.Resources;
 using AgroMap.Services;
 using AgroMap.Views;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -33,8 +35,6 @@ namespace AgroMap
             if (UserService.LoadUserSession().Level == 0)
                 CreateSuperOptions();
 
-
-
             //ListView
             list_view_inspections.ItemTapped += ListView_Tapped;
             list_view_inspections.HasUnevenRows = true;
@@ -61,7 +61,11 @@ namespace AgroMap
             if (isRefreshing)
                 return;
             isRefreshing = true;
-            List<Inspection> __inspections = await InspectionService.GetAvailable();
+            if (!(await InspectionService.SyncWithServer()))
+            {
+                await DisplayAlert(Strings.Warning, Strings.CannotSync + "\n" + Strings.LoadedFromLocal, Strings.OK);
+            }
+            List<Inspection> __inspections = await InspectionDAO.GetLocalItens();
             list_view_inspections.ItemsSource = __inspections;
             list_view_inspections.IsRefreshing = false;
             isRefreshing = false;
@@ -81,12 +85,33 @@ namespace AgroMap
 
         private async void ShowNewInspectScreen()
         {
-            await Navigation.PushAsync(new NewInspectionScreen());
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                await Navigation.PushAsync(new NewInspectionScreen());
+            }
+            else
+            {
+                await DisplayAlert(Strings.Error, Strings.NoInternet, Strings.OK);
+            }
+            
         }
 
-        private void Btn_New_Inspection_Click(object sender, EventArgs e)
+        private async void Btn_New_Inspection_Click(object sender, EventArgs e)
         {
-            ShowNewInspectScreen();
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    ShowNewInspectScreen();
+                }
+                else
+                {
+                    await DisplayAlert(Strings.Error, Strings.NoInternet, Strings.OK);
+                }
+            }catch(Exception err)
+            {
+                Debug.WriteLine("AGROMAP|InspectionScreen|Btn_New_Inspection(): " + err.Message);
+            }
         }
 
 

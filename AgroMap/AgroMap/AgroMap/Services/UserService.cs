@@ -37,7 +37,6 @@ namespace AgroMap
                 HttpResponseMessage response = null;
                 httpClient.BaseAddress = new Uri(Strings.ServerURL);
 
-
                 JObject json = new JObject();
                 json.Add("email", user.Email);
                 json.Add("password", user.Password);
@@ -151,6 +150,20 @@ namespace AgroMap
                 return null;
             }
             
+        }
+
+        public static int GetLoggedUserId()
+        {
+            try
+            {
+                return AppSettings.GetValueOrDefault("id", 0);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("AGROMAP|UserService.cs|GetLoggedUserId: " + e.Message);
+                return 0;
+            }
+
         }
 
         public static void Logout()

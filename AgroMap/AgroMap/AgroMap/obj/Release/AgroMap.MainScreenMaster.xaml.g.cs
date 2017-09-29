@@ -11,8 +11,8 @@
 namespace AgroMap {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Users\\Juliana\\Dropbox\\IFSP\\6-Semestre\\PRJ\\Projeto\\agromap\\AgroMap\\AgroMap\\Agro" +
-        "Map\\MainScreenMaster.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Users\\Eraldo\\Dropbox\\IFSP\\6-Semestre\\PRJ\\Projeto\\agromap\\AgroMap\\AgroMap\\AgroM" +
+        "ap\\MainScreenMaster.xaml")]
     public partial class MainScreenMaster : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]

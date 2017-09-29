@@ -117,17 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Attention" xml:space="preserve">
+    <value>Attention</value>
+  </data>
   <data name="AvailableInspections" xml:space="preserve">
     <value>Available inspections</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="CannotSync" xml:space="preserve">
+    <value>Error while sync with server</value>
+  </data>
   <data name="Closed" xml:space="preserve">
     <value>Closed</value>
   </data>
   <data name="CreatedAt" xml:space="preserve">
     <value>Created at</value>
+  </data>
+  <data name="CreatedWithSuccess" xml:space="preserve">
+    <value>Created with success</value>
   </data>
   <data name="Datetime" xml:space="preserve">
     <value>Date/Time</value>
@@ -150,8 +159,14 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EmptyFields" xml:space="preserve">
+    <value>All fields are required</value>
+  </data>
   <data name="EndAt" xml:space="preserve">
     <value>Ends at</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="Event" xml:space="preserve">
     <value>Event</value>
@@ -174,6 +189,9 @@
   <data name="Latitude" xml:space="preserve">
     <value>Latitude</value>
   </data>
+  <data name="LoadedFromLocal" xml:space="preserve">
+    <value>Showing data from local storage</value>
+  </data>
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
@@ -189,6 +207,15 @@
   <data name="NewInspection" xml:space="preserve">
     <value>New inspection</value>
   </data>
+  <data name="NoInternet" xml:space="preserve">
+    <value>No internet connection</value>
+  </data>
+  <data name="NotSync" xml:space="preserve">
+    <value>Not synced</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
   <data name="Open" xml:space="preserve">
     <value>Open</value>
   </data>
@@ -203,6 +230,15 @@
   </data>
   <data name="Send" xml:space="preserve">
     <value>Send</value>
+  </data>
+  <data name="ServerURICreateEvent" xml:space="preserve">
+    <value>/api/inspection/create-event</value>
+  </data>
+  <data name="ServerURICreateEvents" xml:space="preserve">
+    <value>/api/inspection/create-events</value>
+  </data>
+  <data name="ServerURICreateInspection" xml:space="preserve">
+    <value>/api/inspection/create</value>
   </data>
   <data name="ServerURIEventById" xml:space="preserve">
     <value>/api/inspection/get-event-by-id/</value>
@@ -231,9 +267,15 @@
   <data name="ServerURISignup" xml:space="preserve">
     <value>/api/user/signup</value>
   </data>
+  <data name="ServerURIUpdateInspection" xml:space="preserve">
+    <value>/api/inspection/update</value>
+  </data>
   <data name="ServerURL" xml:space="preserve">
-    <value>https://murmuring-fjord-35648.herokuapp.com/</value>
+    <value>http://192.168.25.3:8000/</value>
     <comment>Server URL</comment>
+  </data>
+  <data name="ServerURL2" xml:space="preserve">
+    <value>https://murmuring-fjord-35648.herokuapp.com/</value>
   </data>
   <data name="ShowOnMap" xml:space="preserve">
     <value>Show on map</value>
@@ -250,10 +292,28 @@
   <data name="StartAt" xml:space="preserve">
     <value>Starts at</value>
   </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="SuccessSignup" xml:space="preserve">
+    <value>Account created! Now you can login</value>
+  </data>
+  <data name="ToManageInspection" xml:space="preserve">
+    <value>In order, to manage inspections, a internet connection is required</value>
+  </data>
   <data name="Typeof" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>An unexpected error has occurred</value>
+  </data>
+  <data name="UserDataError" xml:space="preserve">
+    <value>Error with your data. Do you already have an account?</value>
+  </data>
   <data name="UserID" xml:space="preserve">
     <value>User id</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
   </data>
 </root>

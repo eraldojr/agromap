@@ -57,6 +57,7 @@ namespace AgroMap
             if (ent_password_signup.Text.Equals(string.Empty)) errors += 1;
             if(errors > 0)
             {
+                await DisplayAlert(Strings.Attention, Strings.EmptyFields, Strings.OK);
                 return;
             }
 
@@ -72,11 +73,16 @@ namespace AgroMap
                 int response_code = await UserService.Signup(u);
                 if (response_code == 201)
                 {
+                    await DisplayAlert(Strings.Success, Strings.SuccessSignup, Strings.OK);
                     BackToLogin();
+                }
+                else if (response_code == 400)
+                {
+                    await DisplayAlert(Strings.Error, Strings.UserDataError, Strings.OK);
                 }
                 else
                 {
-                    ent_email_signup.Text = response_code.ToString();
+                    await DisplayAlert(Strings.Error, Strings.UnexpectedError, Strings.OK);
                 }
             }
             catch (Exception err)

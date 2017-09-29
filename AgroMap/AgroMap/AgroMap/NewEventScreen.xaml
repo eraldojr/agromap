@@ -3,6 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AgroMap.NewEventScreen">
     <ContentPage.Content>
-     
+        <StackLayout
+            Orientation="Vertical">
+            <Label x:Name="lbl_main"
+                   HorizontalOptions="FillAndExpand"
+                   HorizontalTextAlignment="Center"/>
+            <StackLayout Orientation="Horizontal">
+                <Label x:Name="lbl_id"/>
+                <Entry x:Name="ent_id"
+                       HorizontalOptions="FillAndExpand"
+                       />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label x:Name="lbl_description"/>
+                <Entry x:Name="ent_description"
+                       HorizontalOptions="FillAndExpand"
+                       />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label x:Name="lbl_type"/>
+                <Entry x:Name="ent_type"
+                       HorizontalOptions="FillAndExpand"
+                       />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="btn_save"
+                        HorizontalOptions="FillAndExpand"
+                        />
+                <Button x:Name="btn_cancel"
+                        HorizontalOptions="FillAndExpand"
+                        />
+            </StackLayout>
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

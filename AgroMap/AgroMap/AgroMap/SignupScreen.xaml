@@ -68,13 +68,13 @@
                 HorizontalOptions="FillAndExpand"
                 Padding="0"
                 >
-                <Button x:Name="btn_back_signup"
-                        HorizontalOptions="FillAndExpand"
-                        Clicked="btn_back_signup_Clicked"
-                        />
                 <Button x:Name="btn_send_signup"
                         HorizontalOptions="FillAndExpand"
                         Clicked="btn_send_signup_Clicked"
+                        />
+                <Button x:Name="btn_back_signup"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="btn_back_signup_Clicked"
                         />
             </StackLayout>
         </StackLayout>

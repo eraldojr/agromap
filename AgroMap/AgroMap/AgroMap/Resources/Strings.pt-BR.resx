@@ -117,8 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Attention" xml:space="preserve">
+    <value>Atenção</value>
+  </data>
+  <data name="AvailableInspections" xml:space="preserve">
+    <value>Inspeções disponíveis</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>
+  </data>
+  <data name="CannotSync" xml:space="preserve">
+    <value>Erro ao sincronizar</value>
+  </data>
+  <data name="Closed" xml:space="preserve">
+    <value>Fechado</value>
+  </data>
+  <data name="CreatedAt" xml:space="preserve">
+    <value>Criado em</value>
+  </data>
+  <data name="CreatedWithSuccess" xml:space="preserve">
+    <value>Criado com sucesso</value>
   </data>
   <data name="Datetime" xml:space="preserve">
     <value>Data/Hora</value>
@@ -127,19 +145,34 @@
     <value>Excluir</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Description</value>
+    <value>Descrição</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detalhes</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Alterar</value>
+    <value>Editar</value>
+  </data>
+  <data name="EditInspection" xml:space="preserve">
+    <value>Editar inspeção</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EmptyFields" xml:space="preserve">
+    <value>Todos os campos são obrigatórios</value>
+  </data>
   <data name="EndAt" xml:space="preserve">
     <value>Termina em</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Erro</value>
+  </data>
   <data name="Event" xml:space="preserve">
     <value>Evento</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Eventos</value>
   </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
@@ -147,11 +180,17 @@
   <data name="Inspection" xml:space="preserve">
     <value>Inspeção</value>
   </data>
+  <data name="Last_Edit_At" xml:space="preserve">
+    <value>Última edição em</value>
+  </data>
   <data name="Last_name" xml:space="preserve">
     <value>Último nome</value>
   </data>
   <data name="Latitude" xml:space="preserve">
     <value>Latitude</value>
+  </data>
+  <data name="LoadedFromLocal" xml:space="preserve">
+    <value>Mostrando dados do dispositivo</value>
   </data>
   <data name="Logout" xml:space="preserve">
     <value>Sair</value>
@@ -165,6 +204,21 @@
   <data name="New" xml:space="preserve">
     <value>Novo</value>
   </data>
+  <data name="NewInspection" xml:space="preserve">
+    <value>Nova inspeção</value>
+  </data>
+  <data name="NoInternet" xml:space="preserve">
+    <value>Sem conexão</value>
+  </data>
+  <data name="NotSync" xml:space="preserve">
+    <value>Não sincronizado</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Aberto</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Senha</value>
   </data>
@@ -177,26 +231,89 @@
   <data name="Send" xml:space="preserve">
     <value>Enviar</value>
   </data>
+  <data name="ServerURICreateEvent" xml:space="preserve">
+    <value>/api/inspection/create-event</value>
+  </data>
+  <data name="ServerURICreateEvents" xml:space="preserve">
+    <value>/api/inspection/create-events</value>
+  </data>
+  <data name="ServerURICreateInspection" xml:space="preserve">
+    <value>/api/inspection/create</value>
+  </data>
+  <data name="ServerURIEventById" xml:space="preserve">
+    <value>/api/inspection/get-event-by-id/</value>
+  </data>
+  <data name="ServerURIEventByInspection" xml:space="preserve">
+    <value>/api/inspection/get-event-by-inspection/</value>
+  </data>
+  <data name="ServerURIEventByUser" xml:space="preserve">
+    <value>/api/inspection/get-event-by-user/</value>
+  </data>
+  <data name="ServerURIInspectionAll" xml:space="preserve">
+    <value>/api/inspection/get-all</value>
+  </data>
+  <data name="ServerURIInspectionById" xml:space="preserve">
+    <value>/api/inspection/get-by-id/</value>
+  </data>
+  <data name="ServerURIInspectionBySupervisor" xml:space="preserve">
+    <value>/api/inspection/get-by-supervisor/</value>
+  </data>
+  <data name="ServerURIInspectionByUser" xml:space="preserve">
+    <value>/api/inspection/get-by-user/</value>
+  </data>
   <data name="ServerURISignin" xml:space="preserve">
     <value>/api/user/signin</value>
   </data>
   <data name="ServerURISignup" xml:space="preserve">
     <value>/api/user/signup</value>
   </data>
+  <data name="ServerURIUpdateInspection" xml:space="preserve">
+    <value>/api/inspection/update</value>
+  </data>
   <data name="ServerURL" xml:space="preserve">
-    <value>https://murmuring-fjord-35648.herokuapp.com/</value>
+    <value>http://192.168.0.3:8000/</value>
     <comment>Server URL</comment>
   </data>
+  <data name="ServerURL2" xml:space="preserve">
+    <value>https://murmuring-fjord-35648.herokuapp.com/</value>
+  </data>
+  <data name="ShowOnMap" xml:space="preserve">
+    <value>Mostrar no mapa</value>
+  </data>
   <data name="Signin" xml:space="preserve">
-    <value>Entrar</value>
+    <value>Acessar</value>
   </data>
   <data name="Signup" xml:space="preserve">
-    <value>Registrar</value>
+    <value>Cadastrar</value>
   </data>
   <data name="Sincronize" xml:space="preserve">
     <value>Sincronizar</value>
   </data>
   <data name="StartAt" xml:space="preserve">
     <value>Inicia em</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Sucesso</value>
+  </data>
+  <data name="SuccessSignup" xml:space="preserve">
+    <value>Conta criada! Agora você já pode fazer o login</value>
+  </data>
+  <data name="ToManageInspection" xml:space="preserve">
+    <value>Para gerencia inspeções, é necessária uma conexão com internet</value>
+  </data>
+  <data name="Typeof" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Um erro inesperado ocorreu</value>
+  </data>
+  <data name="UserDataError" xml:space="preserve">
+    <value>Erro nas informações. Você já possui uma conta?</value>
+  </data>
+  <data name="UserID" xml:space="preserve">
+    <value>ID do usuário</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Aviso</value>
   </data>
 </root>

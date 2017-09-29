@@ -1,4 +1,5 @@
-﻿using AgroMap.Entity;
+﻿using AgroMap.Database;
+using AgroMap.Entity;
 using AgroMap.Resources;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,6 @@ namespace AgroMap
             {
                 Debug.WriteLine("AGROMAP|LoginScreen.cs|btn_signup_login_Clicked: " + err.Message);
             }
-
         }
 
         async void btn_signin_login_Clicked(object sender, EventArgs e)

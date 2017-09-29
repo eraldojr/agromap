@@ -35,13 +35,13 @@ namespace AgroMap.Views
 
             //Atribuindo valores e bindings
             lblID.Text = Strings.ID;
-            lblIDContent.SetBinding(Label.TextProperty, "Id");
+            lblIDContent.SetBinding(Label.TextProperty, "id");
             lblName.Text = Strings.Name;
-            lblNameContent.SetBinding(Label.TextProperty, "Name");
+            lblNameContent.SetBinding(Label.TextProperty, "name");
             lblStart.Text = Strings.StartAt;
-            lblStartContent.SetBinding(Label.TextProperty, "Start_At");
+            lblStartContent.SetBinding(Label.TextProperty, "start_at");
             lblEnd.Text = Strings.EndAt;
-            lblEndContent.SetBinding(Label.TextProperty, "End_At");
+            lblEndContent.SetBinding(Label.TextProperty, "end_at");
 
             //Propriedades de Layout
             mainLayout.BackgroundColor = Color.FromHex ("#eee");
