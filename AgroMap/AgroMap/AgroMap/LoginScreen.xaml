@@ -4,14 +4,39 @@
              x:Class="AgroMap.LoginScreen">
     <ContentPage.Content>
         <StackLayout
-            Orientation="Vertical">
-            <ActivityIndicator x:Name="actIndLogin" Color="Red" IsRunning="false" IsVisible="False" />
-            <StackLayout x:Name="login_itens">
+            Orientation="Vertical"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            Padding="15"
+            >
+            <ActivityIndicator
+                x:Name="actIndLogin"
+                Color="Red" IsRunning="false"
+                IsVisible="False"
+                WidthRequest="200"
+                VerticalOptions="Center"
+                />
+            <StackLayout x:Name="login_itens"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         >
                 <Image x:Name="img_login" WidthRequest="200"/>
                 <Entry x:Name="txt_email_login" Placeholder="Email"/>
                 <Entry x:Name="txt_pass_login" Placeholder="Password" IsPassword="True"/>
-                <Button Text="Sign In" x:Name="btn_signin_login" Clicked="btn_signin_login_Clicked"/>
-                <Button Text="Sign Up" x:Name="btn_signup_login" Clicked="btn_signup_login_Clicked"/>
+                <Button
+                    x:Name="btn_signin"
+                    Clicked="btn_signin_login_Clicked"
+                    BackgroundColor="#23a1b2"
+                    TextColor="#FFF"
+                    >
+                </Button>
+                <Button
+                    x:Name="btn_signup"
+                    Clicked="btn_signup_login_Clicked"
+                    VerticalOptions="EndAndExpand"
+                    BackgroundColor="Transparent"
+                    TextColor="#000"
+                    />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

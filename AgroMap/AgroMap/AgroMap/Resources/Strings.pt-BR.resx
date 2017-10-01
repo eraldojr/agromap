@@ -138,11 +138,17 @@
   <data name="CreatedWithSuccess" xml:space="preserve">
     <value>Criado com sucesso</value>
   </data>
+  <data name="CredentialsError" xml:space="preserve">
+    <value>Dados inválidos. Verifique seu email e senha</value>
+  </data>
   <data name="Datetime" xml:space="preserve">
     <value>Data/Hora</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Excluir</value>
+  </data>
+  <data name="DeletedInspection" xml:space="preserve">
+    <value>Inspeção excluída com sucesso</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Descrição</value>
@@ -198,6 +204,9 @@
   <data name="Longitude" xml:space="preserve">
     <value>Longitude</value>
   </data>
+  <data name="MustBeSupervisor" xml:space="preserve">
+    <value>Você precisa ser o supervisor desta inspeção para gerenciá-la</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Nome</value>
   </data>
@@ -240,6 +249,9 @@
   <data name="ServerURICreateInspection" xml:space="preserve">
     <value>/api/inspection/create</value>
   </data>
+  <data name="ServerURIDeleteInspection" xml:space="preserve">
+    <value />
+  </data>
   <data name="ServerURIEventById" xml:space="preserve">
     <value>/api/inspection/get-event-by-id/</value>
   </data>
@@ -271,11 +283,11 @@
     <value>/api/inspection/update</value>
   </data>
   <data name="ServerURL" xml:space="preserve">
-    <value>http://192.168.0.3:8000/</value>
+    <value>https://murmuring-fjord-35648.herokuapp.com/</value>
     <comment>Server URL</comment>
   </data>
   <data name="ServerURL2" xml:space="preserve">
-    <value>https://murmuring-fjord-35648.herokuapp.com/</value>
+    <value>http://192.168.0.3:8000/</value>
   </data>
   <data name="ShowOnMap" xml:space="preserve">
     <value>Mostrar no mapa</value>
@@ -303,6 +315,9 @@
   </data>
   <data name="Typeof" xml:space="preserve">
     <value>Tipo</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Não autorizado</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>Um erro inesperado ocorreu</value>

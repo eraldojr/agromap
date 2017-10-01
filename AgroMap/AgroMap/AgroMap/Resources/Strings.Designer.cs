@@ -125,6 +125,15 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid credentials. Verify your email and password.
+        /// </summary>
+        internal static string CredentialsError {
+            get {
+                return ResourceManager.GetString("CredentialsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date/Time.
         /// </summary>
         internal static string Datetime {
@@ -139,6 +148,15 @@ namespace AgroMap.Resources {
         internal static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inspection deleted with success.
+        /// </summary>
+        internal static string DeletedInspection {
+            get {
+                return ResourceManager.GetString("DeletedInspection", resourceCulture);
             }
         }
         
@@ -305,6 +323,15 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must be the supervisor of this inspection to manage it.
+        /// </summary>
+        internal static string MustBeSupervisor {
+            get {
+                return ResourceManager.GetString("MustBeSupervisor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string Name {
@@ -404,6 +431,15 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ServerBackup2 {
+            get {
+                return ResourceManager.GetString("ServerBackup2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/inspection/create-event.
         /// </summary>
         internal static string ServerURICreateEvent {
@@ -427,6 +463,15 @@ namespace AgroMap.Resources {
         internal static string ServerURICreateInspection {
             get {
                 return ResourceManager.GetString("ServerURICreateInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /api/inspection/delete.
+        /// </summary>
+        internal static string ServerURIDeleteInspection {
+            get {
+                return ResourceManager.GetString("ServerURIDeleteInspection", resourceCulture);
             }
         }
         
@@ -532,9 +577,9 @@ namespace AgroMap.Resources {
         /// <summary>
         ///   Looks up a localized string similar to https://murmuring-fjord-35648.herokuapp.com/.
         /// </summary>
-        internal static string ServerURL2 {
+        internal static string ServerURLBackup {
             get {
-                return ResourceManager.GetString("ServerURL2", resourceCulture);
+                return ResourceManager.GetString("ServerURLBackup", resourceCulture);
             }
         }
         
@@ -616,6 +661,15 @@ namespace AgroMap.Resources {
         internal static string Typeof {
             get {
                 return ResourceManager.GetString("Typeof", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unauthorized.
+        /// </summary>
+        internal static string Unauthorized {
+            get {
+                return ResourceManager.GetString("Unauthorized", resourceCulture);
             }
         }
         

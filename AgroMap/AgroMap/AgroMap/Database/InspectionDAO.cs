@@ -13,44 +13,19 @@ namespace AgroMap.Database
     static class InspectionDAO
     {
         private static string Table = "Inspection";
-        
-        public static async  Task<List<Inspection>> GetLocalItens()
+
+        // Busca todas inspeções salvas localmente
+        public static async Task<List<Inspection>> GetAll()
         {
-            
+
             SQLiteAsyncConnection db = Database.GetConn();
-            if(db!=null)
+            if (db != null)
                 return await db.Table<Inspection>().ToListAsync();
             Debug.WriteLine("AGROMAP|InspectionDAO.cs|GetLocalItens - Null");
             return null;
         }
 
-        public static async Task<List<Inspection>> GetLocalItensBy(string param, string value, Boolean isInt)
-        {
-            SQLiteAsyncConnection db = Database.GetConn();
-            if (db != null)
-            {
-                try
-                {
-                    int __value = 0;
-                    if (isInt)
-                    {
-                        __value = Convert.ToInt32(value);
-                    }
-                    string sql = String.Format("SELECT * FROM {0} WHERE {1} = {2}", Table, param, __value);
-                    Debug.WriteLine("AGROMAP|EventDAO.cs|GetItensBy: SQL: " + sql);
-
-                    return await db.QueryAsync<Inspection>(sql);
-                }
-                catch (Exception err)
-                {
-                    Debug.WriteLine("AGROMAP|EventDAO.cs|GetItensBy: " + err.Message);
-                    return null;
-                }
-            }
-            Debug.WriteLine("AGROMAP|InspectionDAO.cs|GetLocalItensBy - Null");
-            return null;
-        }
-
+        // Busca inspecao por ID
         public static async Task<Inspection> GetByID(int id)
         {
 
@@ -71,15 +46,15 @@ namespace AgroMap.Database
             return null;
         }
 
+        // Salva lista de inspeções no armazenamento local
         public static async Task<Boolean> SaveInLocalStorage(List<Inspection> inspections)
         {
-            
+
             SQLiteAsyncConnection db = Database.GetConn();
             if (db != null)
             {
                 try
                 {
-                    
                     db.DropTableAsync<Inspection>().Wait();
                     db.CreateTableAsync<Inspection>().Wait();
                     foreach (Inspection i in inspections)
@@ -98,6 +73,7 @@ namespace AgroMap.Database
             return false;
         }
 
+        // Salva uma inspeção no armazenamento local
         public static async Task<Boolean> Create(Inspection inspection)
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -123,5 +99,41 @@ namespace AgroMap.Database
             return false;
         }
 
+        // Exclui inspeção do armazenamento local
+        public static async Task<Boolean> Delete(Inspection i)
+        {
+
+            SQLiteAsyncConnection db = Database.GetConn();
+            if (db == null)
+                return false;
+            await CheckTable();
+            try
+            {
+                await db.DeleteAsync(i);
+                return true;
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine("AGROMAP|InspectionDAO.cs|Delete: " + err.Message);
+                return false;
+            }
+        }
+
+        //Verifica se a tabela existe. Se não, cria a tabela
+        private static async Task<Boolean> CheckTable()
+        {
+            SQLiteAsyncConnection db = Database.GetConn();
+            if (db == null)
+                return false;
+            try
+            {
+                await db.Table<Inspection>().Where(i => i.id == 0).FirstOrDefaultAsync();
+            }
+            catch
+            {
+                db.CreateTableAsync<Inspection>().Wait();
+            }
+            return true;
+        }
     }
 }

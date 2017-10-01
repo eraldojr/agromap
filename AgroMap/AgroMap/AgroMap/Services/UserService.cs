@@ -6,13 +6,10 @@ using Newtonsoft.Json.Linq;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace AgroMap
 {
@@ -29,17 +26,20 @@ namespace AgroMap
             }
         }
 
-        public static async Task<Boolean> Signin(User user)
+        public static async Task<int> Signin(User user)
         {
+            HttpResponseMessage response = null;
             try
             {
                 HttpClient httpClient = new HttpClient();
-                HttpResponseMessage response = null;
+                
                 httpClient.BaseAddress = new Uri(Strings.ServerURL);
+                httpClient.Timeout = TimeSpan.FromSeconds(60);                
 
                 JObject json = new JObject();
                 json.Add("email", user.Email);
                 json.Add("password", user.Password);
+                //var hashAlgorithm = new Blake2B(512);
 
                 MultipartFormDataContent form = new MultipartFormDataContent();
                 form.Add(new StringContent(json.ToString()), "user");
@@ -55,19 +55,19 @@ namespace AgroMap
                     var responseContent = await response.Content.ReadAsStringAsync();
                     User __user = JsonConvert.DeserializeObject<User>(responseContent);
                     SaveUserSession(__user);
-                    return true;
+                    return (int)response.StatusCode;
                 }
-                else
-                {
-                    return false;
-                }
-
+            }
+            catch (TaskCanceledException ex)
+            {
+                Debug.WriteLine("AGROMAP|UserService.cs|Signin - Timeout: " + ex.Message);
+                return 500;
             }
             catch (Exception e)
             {
                 Debug.WriteLine("AGROMAP|UserService.cs|Signin: " + e.Message);
-                return false;
             }
+            return (int)response.StatusCode;
 
         }
 

@@ -29,15 +29,6 @@ namespace AgroMap
             if (item == null)
                 return;
 
-            //var page = (Page)Activator.CreateInstance(item.TargetType);
-            //page.Title = item.Title;
-
-            //Detail = new NavigationPage(page);
-            //IsPresented = false;
-
-            //MasterPage.ListView.SelectedItem = null;
-
-
             if (item.Id == 0)
             {
                 await Navigation.PushAsync(new InspectionScreen()); 
@@ -46,6 +37,7 @@ namespace AgroMap
             {
                 UserService.Logout();
                 Navigation.InsertPageBefore(new LoginScreen(), this);
+                Navigation.RemovePage(this);
                 await Navigation.PopAsync();
             }
 

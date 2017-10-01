@@ -19,14 +19,14 @@ namespace AgroMap
     public partial class NewEventScreen : ContentPage
     {
         private Event __event;
-        private int inspection_id;
+        private EventTabScreen masterPage;
 
-        public NewEventScreen(int inspection_id)
+        public NewEventScreen(EventTabScreen __masterpage)
         {
             InitializeComponent();
             InitComponents();
             this.__event = null;
-            this.inspection_id = inspection_id;
+            this.masterPage = __masterpage;
         }
 
         public NewEventScreen(Event __event)
@@ -40,9 +40,16 @@ namespace AgroMap
         { 
             //Atribuindo propriedades
             if (__event != null)
+            {
                 lbl_main.Text = Strings.Edit + " " + Strings.Event;
+                ent_id.Text = __event.id.ToString();
+            }
             else
+            {
                 lbl_main.Text = Strings.New + " " + Strings.Event;
+            }
+
+            ent_id.IsEnabled = false;
 
             lbl_id.Text = Strings.ID;
             lbl_type.Text = Strings.Typeof;
@@ -64,6 +71,7 @@ namespace AgroMap
                     __event.description = ent_description.Text;
                     __event.types = __event.types;
                     __event.description = ent_description.Text;
+                    __event.last_edit_at = DateTime.Now;
                     __event.latitude = "41ºSE 51ºLF";
                     __event.longitude = "54ºSW 85ºNW";
                 }
@@ -72,8 +80,10 @@ namespace AgroMap
                     this.__event = new Event
                     {
                         id = 0,
-                        inspection = inspection_id,
+                        inspection = this.masterPage.inspection.id,
                         user = UserService.GetLoggedUserId(),
+                        created_at = DateTime.Now,
+                        last_edit_at = DateTime.Now,
                         types = ent_type.Text,
                         description = ent_description.Text,
                         latitude = "41ºSE 51ºLF",
@@ -85,7 +95,8 @@ namespace AgroMap
                 if (result)
                 {
                     await DisplayAlert(Strings.Success, Strings.CreatedWithSuccess, Strings.OK);
-                    await Navigation.PopAsync();
+                   
+                    masterPage.CurrentPage = masterPage.Children[0];
 
                 }
                 else

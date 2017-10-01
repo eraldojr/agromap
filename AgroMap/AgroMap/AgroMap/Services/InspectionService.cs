@@ -18,13 +18,13 @@ namespace AgroMap.Services
 {
     class InspectionService
     {
+        private static int timeout_seconds = 60 ;
         private static ISettings AppSettings
         {
             get
             {
                 if (CrossSettings.IsSupported)
                     return CrossSettings.Current;
-
                 return null;
             }
         }
@@ -38,8 +38,6 @@ namespace AgroMap.Services
             try
             {
                 var __inspections = await GetInspectionsFromServer(); // 1 - Obtém as inspeções
-                if (__inspections.Count == 0 || __inspections == null)
-                    return false;
                 List<Inspection> inspections = __inspections;
                 if (!await InspectionDAO.SaveInLocalStorage(inspections)) // Salva as inspeções no armazenamento local
                     return false;
@@ -74,17 +72,29 @@ namespace AgroMap.Services
                 HttpClient httpClient = new HttpClient();
                 HttpResponseMessage response = null;
                 httpClient.BaseAddress = new Uri(Strings.ServerURL);
+                httpClient.Timeout = TimeSpan.FromSeconds(timeout_seconds);
 
                 response = await httpClient.GetAsync(Strings.ServerURIInspectionAll);
 
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
-                    if (responseContent.ToString().Equals("None"))
+                    try
+                    {
+                        return JsonConvert.DeserializeObject<List<Inspection>>(responseContent);
+                    }
+                    catch
+                    {
                         return new List<Inspection>();
-                    return JsonConvert.DeserializeObject<List<Inspection>>(responseContent);
+                    }   
                 }
-            }catch(Exception err)
+            }
+            catch (TaskCanceledException ex)
+            {
+                Debug.WriteLine("AGROMAP|InspectionService.cs|GetInspectionsFromServer - Timeout: " + ex.Message);
+                return null;
+            }
+            catch (Exception err)
             {
                 Debug.WriteLine("AGROMAP|InspectionService.cs|GetInspectionsFromServer:: " + err);
             }
@@ -99,6 +109,7 @@ namespace AgroMap.Services
                 HttpClient httpClient = new HttpClient();
                 HttpResponseMessage response = null;
                 httpClient.BaseAddress = new Uri(Strings.ServerURL);
+                httpClient.Timeout = TimeSpan.FromSeconds(timeout_seconds);
 
                 response = await httpClient.GetAsync(Strings.ServerURIEventByInspection + Id.ToString());
 
@@ -109,6 +120,11 @@ namespace AgroMap.Services
                     return data;
 
                 }
+                return null;
+            }
+            catch (TaskCanceledException ex)
+            {
+                Debug.WriteLine("AGROMAP|InspectionService.cs|GetEventsByInspection - Timeout: " + ex.Message);
                 return null;
             }
             catch (Exception e)
@@ -125,6 +141,8 @@ namespace AgroMap.Services
             HttpClient httpClient = new HttpClient();
             HttpResponseMessage response = null;
             httpClient.BaseAddress = new Uri(Strings.ServerURL);
+            httpClient.Timeout = TimeSpan.FromSeconds(timeout_seconds);
+
             var json = new JObject();
             try
             {
@@ -175,9 +193,55 @@ namespace AgroMap.Services
                     return false;
                     
                 }
-            }catch(Exception err)
+            }
+            catch (TaskCanceledException ex)
+            {
+                Debug.WriteLine("AGROMAP|InspectionService.cs|CreateInspection - Timeout: " + ex.Message);
+                return false;
+            }
+            catch (Exception err)
             {
                 Debug.WriteLine("AGROMAP|InspectionService.cs|Create: " + err.Message);
+                return false;
+            }
+        }
+
+        // Envia solicitação para excluir inspeção, exclui inspeção e eventos do armazenamento local
+        public async static Task<Boolean> DeleteInspection(Inspection i)
+        {
+            HttpClient httpClient = new HttpClient();
+            HttpResponseMessage response = null;
+            httpClient.BaseAddress = new Uri(Strings.ServerURL);
+            httpClient.Timeout = TimeSpan.FromSeconds(timeout_seconds);
+
+            var json = new JObject();
+            try
+            {
+                json.Add("id", i.id);
+
+                MultipartFormDataContent form = new MultipartFormDataContent();
+                form.Add(new StringContent(json.ToString()), "inspection");
+
+                StringContent content = new StringContent(form.ToString(), Encoding.UTF8, "application/json");
+
+                response = await httpClient.PostAsync(Strings.ServerURIDeleteInspection, form);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await InspectionDAO.Delete(i);
+                    await EventDAO.DeleteFromInspection(i.id);
+                    return true;
+                }
+                return false;
+            }
+            catch (TaskCanceledException ex)
+            {
+                Debug.WriteLine("AGROMAP|InspectionService.cs|DeleteInspection - Timeout: " + ex.Message);
+                return false;
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine("AGROMAP|InspectionService.cs|Delete: " + err.Message);
                 return false;
             }
         }
@@ -188,6 +252,8 @@ namespace AgroMap.Services
             HttpClient httpClient = new HttpClient();
             HttpResponseMessage response = null;
             httpClient.BaseAddress = new Uri(Strings.ServerURL);
+            httpClient.Timeout = TimeSpan.FromSeconds(timeout_seconds);
+
             var json = new JObject();
             try
             {
@@ -239,6 +305,11 @@ namespace AgroMap.Services
 
                 }
             }
+            catch (TaskCanceledException ex)
+            {
+                Debug.WriteLine("AGROMAP|InspectionService.cs|SendEvent - Timeout: " + ex.Message);
+                return false;
+            }
             catch (Exception err)
             {
                 Debug.WriteLine("AGROMAP|InspectionService.cs|CreateEvent: " + err.Message);
@@ -254,6 +325,8 @@ namespace AgroMap.Services
             HttpClient httpClient = new HttpClient();
             HttpResponseMessage response = null;
             httpClient.BaseAddress = new Uri(Strings.ServerURL);
+            httpClient.Timeout = TimeSpan.FromSeconds(timeout_seconds);
+
             try
             {
                 var json_list = JsonConvert.SerializeObject(events);
@@ -270,6 +343,11 @@ namespace AgroMap.Services
                     return true;
                 }
                 var responseContent = await response.Content.ReadAsStringAsync();
+                return false;
+            }
+            catch (TaskCanceledException ex)
+            {
+                Debug.WriteLine("AGROMAP|InspectionService.cs|SendEvents - Timeout: " + ex.Message);
                 return false;
             }
             catch (Exception err)

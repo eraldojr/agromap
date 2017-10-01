@@ -138,11 +138,17 @@
   <data name="CreatedWithSuccess" xml:space="preserve">
     <value>Created with success</value>
   </data>
+  <data name="CredentialsError" xml:space="preserve">
+    <value>Invalid credentials. Verify your email and password</value>
+  </data>
   <data name="Datetime" xml:space="preserve">
     <value>Date/Time</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="DeletedInspection" xml:space="preserve">
+    <value>Inspection deleted with success</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
@@ -198,6 +204,9 @@
   <data name="Longitude" xml:space="preserve">
     <value>Longitude</value>
   </data>
+  <data name="MustBeSupervisor" xml:space="preserve">
+    <value>You must be the supervisor of this inspection to manage it</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -231,6 +240,9 @@
   <data name="Send" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="ServerBackup2" xml:space="preserve">
+    <value />
+  </data>
   <data name="ServerURICreateEvent" xml:space="preserve">
     <value>/api/inspection/create-event</value>
   </data>
@@ -239,6 +251,9 @@
   </data>
   <data name="ServerURICreateInspection" xml:space="preserve">
     <value>/api/inspection/create</value>
+  </data>
+  <data name="ServerURIDeleteInspection" xml:space="preserve">
+    <value>/api/inspection/delete</value>
   </data>
   <data name="ServerURIEventById" xml:space="preserve">
     <value>/api/inspection/get-event-by-id/</value>
@@ -274,7 +289,7 @@
     <value>http://192.168.25.3:8000/</value>
     <comment>Server URL</comment>
   </data>
-  <data name="ServerURL2" xml:space="preserve">
+  <data name="ServerURLBackup" xml:space="preserve">
     <value>https://murmuring-fjord-35648.herokuapp.com/</value>
   </data>
   <data name="ShowOnMap" xml:space="preserve">
@@ -303,6 +318,9 @@
   </data>
   <data name="Typeof" xml:space="preserve">
     <value>Type</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Unauthorized</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>An unexpected error has occurred</value>

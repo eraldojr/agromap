@@ -14,6 +14,7 @@ namespace AgroMap.Database
     {
         private static string Table = "Event";
         
+        //Retorna todos eventos de todas as inspeções
         public static async Task<List<Event>> GetAll()
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -23,6 +24,7 @@ namespace AgroMap.Database
             return await db.Table<Event>().ToListAsync();
         }
 
+        // Busca todos eventos por inspeção
         public static async Task<List<Event>> GetEventsByInspection(int inspection)
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -42,6 +44,7 @@ namespace AgroMap.Database
             }
         }
 
+        // Retorna todos eventos marcados como não sincronizados
         public static async Task<List<Event>> GetUnsyncedByInspection(int inspection)
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -62,6 +65,7 @@ namespace AgroMap.Database
             }
         }
 
+        // Busca evento pelo id
         public static async Task<Event> GetByID(int id)
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -80,6 +84,7 @@ namespace AgroMap.Database
             }
         }
 
+        // Atualiza um evento e o marca como não sincronizado
         public static async Task<Boolean> Update(Event item)
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -98,6 +103,8 @@ namespace AgroMap.Database
             }
         }
 
+        // Método Não utilizado
+        // Define eventos como sincronizados
         public static async Task<Boolean> SetSynced(List<Event> events)
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -120,6 +127,7 @@ namespace AgroMap.Database
             }
         }
 
+        // Cria um evento
         public static async Task<Boolean> Create(Event item)
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -148,6 +156,7 @@ namespace AgroMap.Database
             }
         }
 
+        // Exclui um evento pelo id
         public static async Task<Boolean> Delete(Event item)
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -166,6 +175,27 @@ namespace AgroMap.Database
             }
         }
 
+        // Exclui todos eventos de uma inspeção
+        public static async Task<Boolean> DeleteFromInspection(int id)
+        {
+            SQLiteAsyncConnection db = Database.GetConn();
+            if (db == null)
+                return false;
+            await CheckTable();
+            try
+            {
+                string sql = String.Format("DELETE FROM {0} WHERE inspection = {1}", Table, id);
+                await db.QueryAsync<Event>(sql);
+                return true;
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine("AGROMAP|EventDAO.cs|Delete: " + err.Message);
+                return false;
+            }
+        }
+
+        // Exclui todos eventos de uma lista e salva novos registros
         public static async Task<Boolean> SaveList(List<Event> events, int inspection)
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -196,6 +226,7 @@ namespace AgroMap.Database
             }
         }
 
+        //Verifica se a tabela existe. Se não, cria a tabela
         private static async Task<Boolean> CheckTable()
         {
             SQLiteAsyncConnection db = Database.GetConn();

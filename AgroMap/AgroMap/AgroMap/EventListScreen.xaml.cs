@@ -26,15 +26,23 @@ namespace AgroMap
             InitializeComponent();
             InitComponents();
             LoadEvents();
+            
+        }
 
+        override
+        protected void OnAppearing()
+        {
+            LoadEvents();
+        }
+
+        private void EventListScreen_Focused(object sender, FocusEventArgs e)
+        {
+            LoadEvents();
         }
 
         private void InitComponents()
         {
             lbl_events.Text = Strings.Events;
-
-            lbl_id.Text = this.masterPage.inspection.id.ToString();
-            lbl_inspection_id.Text = Strings.Inspection + " " + Strings.ID;
             lbl_inspection_name.Text = this.masterPage.inspection.name;
 
 
@@ -46,6 +54,7 @@ namespace AgroMap
         private async void LoadEvents() 
         {
             list_view_events.ItemsSource = await EventDAO.GetEventsByInspection(this.masterPage.inspection.id);
+            list_view_events.IsRefreshing = false;
             return;
             
         }
@@ -66,6 +75,11 @@ namespace AgroMap
         public void ListView_Events_ShowOnMap(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_new_event_Clicked(object sender, EventArgs e)
+        {
+            masterPage.CurrentPage = masterPage.Children[2];
         }
     }
 }
