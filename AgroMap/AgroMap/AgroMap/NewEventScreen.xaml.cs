@@ -1,7 +1,11 @@
-﻿using AgroMap.Entity;
+﻿using AgroMap.Database;
+using AgroMap.Entity;
 using AgroMap.Resources;
+using AgroMap.Services;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,21 +19,14 @@ namespace AgroMap
     public partial class NewEventScreen : ContentPage
     {
         private Event __event;
-        private Label lbl_id;
-        private Entry ent_id;
-        private Label lbl_description;
-        private Entry ent_description;
-        private Label lbl_type;
-        private Entry ent_type;
-        private Button btn_save;
-        private Button btn_cancel;
-        Label lbl_main;
+        private EventTabScreen masterPage;
 
-        public NewEventScreen()
+        public NewEventScreen(EventTabScreen __masterpage)
         {
             InitializeComponent();
             InitComponents();
             this.__event = null;
+            this.masterPage = __masterpage;
         }
 
         public NewEventScreen(Event __event)
@@ -40,75 +37,85 @@ namespace AgroMap
         }
 
         private void InitComponents()
-        {
-            //Inicializando componentes
-            lbl_main = new Label();
-            lbl_id = new Label();
-            ent_id = new Entry();
-            lbl_description = new Label();
-            ent_description = new Entry();
-            lbl_type = new Label();
-            ent_type = new Entry();
-            btn_save = new Button();
-            btn_cancel = new Button();
-
+        { 
             //Atribuindo propriedades
             if (__event != null)
+            {
                 lbl_main.Text = Strings.Edit + " " + Strings.Event;
+                ent_id.Text = __event.id.ToString();
+            }
             else
+            {
                 lbl_main.Text = Strings.New + " " + Strings.Event;
-            lbl_main.HorizontalOptions = LayoutOptions.FillAndExpand;
-            lbl_main.HorizontalTextAlignment = TextAlignment.Center;
-            lbl_main.FontSize = 25;
+            }
+
+            ent_id.IsEnabled = false;
 
             lbl_id.Text = Strings.ID;
             lbl_type.Text = Strings.Typeof;
             lbl_description.Text = Strings.Description;
 
-            ent_id.HorizontalOptions = LayoutOptions.FillAndExpand;
-            ent_description.HorizontalOptions = LayoutOptions.FillAndExpand;
-            ent_type.HorizontalOptions = LayoutOptions.FillAndExpand;
 
             btn_save.Text = Strings.Save;
-            btn_save.HorizontalOptions = LayoutOptions.FillAndExpand;
+            btn_save.Clicked += Btn_save_Clicked;
             btn_cancel.Text = Strings.Cancel;
-            btn_cancel.HorizontalOptions = LayoutOptions.FillAndExpand;
-
-
-            //Adicionando elementos ao layout
-            StackLayout mainLayout = new StackLayout();
-            mainLayout.Orientation = StackOrientation.Vertical;
-            mainLayout.Children.Add(lbl_main);
-
-            StackLayout stack = new StackLayout();
-            stack.Orientation = StackOrientation.Horizontal;
-            stack.Children.Add(lbl_id);
-            stack.Children.Add(ent_id);
-            mainLayout.Children.Add(stack);
-
-            stack = new StackLayout();
-            stack.Orientation = StackOrientation.Horizontal;
-            stack.Children.Add(lbl_description);
-            stack.Children.Add(ent_description);
-            mainLayout.Children.Add(stack);
-            
-            stack = new StackLayout();
-            stack.Orientation = StackOrientation.Horizontal;
-            stack.Children.Add(lbl_type);
-            stack.Children.Add(ent_type);
-            mainLayout.Children.Add(stack);           
-
-            stack = new StackLayout();
-            stack.Orientation = StackOrientation.Horizontal;
-            stack.Children.Add(btn_save);
-            stack.Children.Add(btn_cancel);
-            mainLayout.Children.Add(stack);
-
-            this.Content = mainLayout;
-
-
-
 
         }
+
+        private async void Btn_save_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                if (__event != null)
+                {
+                    __event.description = ent_description.Text;
+                    __event.types = __event.types;
+                    __event.description = ent_description.Text;
+                    __event.last_edit_at = DateTime.Now;
+                    __event.latitude = "41ºSE 51ºLF";
+                    __event.longitude = "54ºSW 85ºNW";
+                }
+                else
+                {
+                    this.__event = new Event
+                    {
+                        id = 0,
+                        inspection = this.masterPage.inspection.id,
+                        user = UserService.GetLoggedUserId(),
+                        created_at = DateTime.Now,
+                        last_edit_at = DateTime.Now,
+                        types = ent_type.Text,
+                        description = ent_description.Text,
+                        latitude = "41ºSE 51ºLF",
+                        longitude = "54ºSW 85ºNW",
+                    };
+                }
+
+                Boolean result = await EventDAO.Create(this.__event);
+                if (result)
+                {
+                    await DisplayAlert(Strings.Success, Strings.CreatedWithSuccess, Strings.OK);
+                   
+                    masterPage.CurrentPage = masterPage.Children[0];
+
+                }
+                else
+                {
+                    await DisplayAlert(Strings.Error, Strings.UnexpectedError, Strings.OK);
+                    return;
+                }
+            }
+            catch (Exception err)
+            {
+
+                Debug.WriteLine("AGROMAP|NewEventScreen.cs|Btn_save():: " + err);
+            }
+        }
+
+        private async void Btn_cancel_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+
     }
 }

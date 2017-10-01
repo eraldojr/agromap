@@ -4,17 +4,32 @@
              x:Class="AgroMap.InspectionScreen">
     <ContentPage.Content>
         <StackLayout
-            Orientation="Vertical"
-            Padding="5"
-            >
+                Orientation="Vertical"
+                Padding="10"
+                x:Name="layout_main"
+                >
             <Label x:Name="lbl_inspections"
-                   HorizontalOptions="FillAndExpand"
-                   FontSize="25"
-                   HorizontalTextAlignment="Center"/>
-            <StackLayout x:Name="super_options"/>
-            <StackLayout x:Name="main_layout">
+                       HorizontalOptions="FillAndExpand"
+                       FontSize="25"
+                       HorizontalTextAlignment="Center"/>
+            <StackLayout x:Name="super_options"
+                         IsVisible="False"
+                         >
+                <Button
+                    x:Name="btn_create"
+                    BackgroundColor="#23a1b2"
+                    TextColor="#FFF"
+                    Clicked="Btn_New_Inspection_Click"
+                    />
+            </StackLayout>
+            <ActivityIndicator x:Name="actInspectionScreen" Color="Red" IsRunning="false" IsVisible="False" />
+            <StackLayout x:Name="main_layout"
+                         VerticalOptions="FillAndExpand"
+                         >
                 <ListView x:Name="list_view_inspections"
-                          IsPullToRefreshEnabled="True">
+                              IsPullToRefreshEnabled="True"
+                          VerticalOptions="FillAndExpand"
+                          >
                     <ListView.Header>
                         <StackLayout HeightRequest="0" />
                     </ListView.Header>

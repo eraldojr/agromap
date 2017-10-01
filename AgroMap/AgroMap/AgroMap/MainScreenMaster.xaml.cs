@@ -21,7 +21,7 @@ namespace AgroMap
         public MainScreenMaster()
         {
             InitializeComponent();
-
+            img_header.Source = ImageSource.FromFile("@drawable/logofull.png");
             BindingContext = new MainScreenMasterViewModel();
             ListView = MenuItemsListView;
         }
@@ -32,6 +32,7 @@ namespace AgroMap
 
             public MainScreenMasterViewModel()
             {
+                
                 MenuItems = new ObservableCollection<MainScreenMenuItem>(new[]
                 {
                     new MainScreenMenuItem { Id = 0, Title = Strings.Inspection },

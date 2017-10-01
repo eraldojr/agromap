@@ -15,7 +15,6 @@ namespace AgroMap
         {
             InitializeComponent();
             LoadFirstPage();
-
         }
 
         private void LoadFirstPage()

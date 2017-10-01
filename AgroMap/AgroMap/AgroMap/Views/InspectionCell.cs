@@ -35,13 +35,13 @@ namespace AgroMap.Views
 
             //Atribuindo valores e bindings
             lblID.Text = Strings.ID;
-            lblIDContent.SetBinding(Label.TextProperty, "Id");
+            lblIDContent.SetBinding(Label.TextProperty, "id");
             lblName.Text = Strings.Name;
-            lblNameContent.SetBinding(Label.TextProperty, "Name");
+            lblNameContent.SetBinding(Label.TextProperty, "name");
             lblStart.Text = Strings.StartAt;
-            lblStartContent.SetBinding(Label.TextProperty, "Start_At");
+            lblStartContent.SetBinding(Label.TextProperty, "start_at");
             lblEnd.Text = Strings.EndAt;
-            lblEndContent.SetBinding(Label.TextProperty, "End_At");
+            lblEndContent.SetBinding(Label.TextProperty, "end_at");
 
             //Propriedades de Layout
             mainLayout.BackgroundColor = Color.FromHex ("#eee");
@@ -70,36 +70,18 @@ namespace AgroMap.Views
             mainLayout.Children.Add(thirdLine);
             mainLayout.Children.Add(fourthLine);
 
-
-            var details = new MenuItem { Text = Strings.Details };
-            details.SetBinding(MenuItem.CommandParameterProperty, new Binding("."));
-            details.Clicked += async (sender, e) =>
-            {
-                page.ListView_Inspection_Details(((Inspection)BindingContext));
-            };
-
-            var members = new MenuItem { Text = Strings.ShowOnMap };
-            members.SetBinding(MenuItem.CommandParameterProperty, new Binding("."));
-            members.Clicked += async (sender, e) => {
-                page.ListView_Inspection_Members(((Inspection)BindingContext));
-            };
-
             var edit = new MenuItem { Text = Strings.Edit };
             edit.SetBinding(MenuItem.CommandParameterProperty, new Binding("."));
-            edit.Clicked += async (sender, e) => {
+            edit.Clicked += (sender, e) => {
                 page.ListView_Inspection_Edit(((Inspection)BindingContext));
-                
             };
 
             var delete = new MenuItem { Text = Strings.Delete };
             delete.SetBinding(MenuItem.CommandParameterProperty, new Binding("."));
-            delete.Clicked += async (sender, e) => {
+            delete.Clicked += (sender, e) => {
                 page.ListView_Inspection_Delete(((Inspection)BindingContext));
             };
             
-
-            ContextActions.Add(details);
-            ContextActions.Add(members);
             ContextActions.Add(edit);
             ContextActions.Add(delete);
 

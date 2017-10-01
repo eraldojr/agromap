@@ -1,5 +1,6 @@
 ﻿using AgroMap.Entity;
 using AgroMap.Resources;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -57,8 +58,15 @@ namespace AgroMap
             if (ent_password_signup.Text.Equals(string.Empty)) errors += 1;
             if(errors > 0)
             {
+                await DisplayAlert(Strings.Attention, Strings.EmptyFields, Strings.OK);
                 return;
             }
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await DisplayAlert(Strings.Error, Strings.NoInternet, Strings.OK);
+                return;
+            }
+            ShowAnimation();
 
             try
             {
@@ -72,17 +80,38 @@ namespace AgroMap
                 int response_code = await UserService.Signup(u);
                 if (response_code == 201)
                 {
+                    await DisplayAlert(Strings.Success, Strings.SuccessSignup, Strings.OK);
                     BackToLogin();
                 }
-                else
+                else if (response_code == 400)
                 {
-                    ent_email_signup.Text = response_code.ToString();
+                    await DisplayAlert(Strings.Error, Strings.UserDataError, Strings.OK);
+                    HideAnimation();
+                    return;
                 }
             }
             catch (Exception err)
             {
                 Debug.WriteLine("AGROMAP|LoginScreen.cs|btn_send_signup_Clicked: " + err.Message);
             }
+            await DisplayAlert(Strings.Error, Strings.UnexpectedError, Strings.OK);
+            HideAnimation();
+            return;
+        }
+
+        private void ShowAnimation()
+        {
+            actIndLogin.IsVisible = true;
+            actIndLogin.IsRunning = true;
+            signup_itens.IsVisible = false;
+        }
+
+        private void HideAnimation()
+        {
+            actIndLogin.IsVisible = false;
+            actIndLogin.IsRunning = false;
+            signup_itens.IsVisible = true;
         }
     }
+    
 }

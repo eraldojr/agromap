@@ -5,77 +5,92 @@
     <ContentPage.Content>
         <StackLayout
             Orientation="Vertical"
-            Padding="10">
-            <Label x:Name="lbl_login"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            >
+            <ActivityIndicator
+                x:Name="actIndLogin"
+                Color="Red" IsRunning="false"
+                IsVisible="False"
+                WidthRequest="200"
+                VerticalOptions="Center"
+                />
+            <StackLayout
+            x:Name="signup_itens"
+            Orientation="Vertical"
+            Padding="10"
+            >
+                <Label x:Name="lbl_login"
                    HorizontalOptions="Center"
                    FontSize="Large"
                    />
-            <StackLayout
+                <StackLayout
                 Orientation="Horizontal"
                 HorizontalOptions="FillAndExpand"
                 Padding="0"
                 >
-                <Label x:Name="lbl_name_signup"
+                    <Label x:Name="lbl_name_signup"
                        VerticalOptions="Center"
                        FontSize="Medium"
                        />
-                <Entry x:Name="ent_name_signup"
+                    <Entry x:Name="ent_name_signup"
                        HorizontalOptions="FillAndExpand"
                        />
-            </StackLayout>
-            <StackLayout
+                </StackLayout>
+                <StackLayout
                 Orientation="Horizontal"
                 HorizontalOptions="FillAndExpand"
                 Padding="0"
                 >
-                <Label x:Name="lbl_last_name_signup"
+                    <Label x:Name="lbl_last_name_signup"
                        VerticalOptions="Center"
                        FontSize="Medium"
                        />
-                <Entry x:Name="ent_last_name_signup"
+                    <Entry x:Name="ent_last_name_signup"
                        HorizontalOptions="FillAndExpand"
                        />
-            </StackLayout>
-            <StackLayout
+                </StackLayout>
+                <StackLayout
                 Orientation="Horizontal"
                 HorizontalOptions="FillAndExpand"
                 Padding="0"
                 >
-                <Label x:Name="lbl_email_signup"
+                    <Label x:Name="lbl_email_signup"
                        VerticalOptions="Center"
                        FontSize="Medium"
                        />
-                <Entry x:Name="ent_email_signup"
+                    <Entry x:Name="ent_email_signup"
                        HorizontalOptions="FillAndExpand"
                        />
-            </StackLayout>
-            <StackLayout
+                </StackLayout>
+                <StackLayout
                 Orientation="Horizontal"
                 HorizontalOptions="FillAndExpand"
                 Padding="0"
                 >
-                <Label x:Name="lbl_password_signup"
+                    <Label x:Name="lbl_password_signup"
                        VerticalOptions="Center"
                        FontSize="Medium"
                        />
-                <Entry x:Name="ent_password_signup"
+                    <Entry x:Name="ent_password_signup"
                        HorizontalOptions="FillAndExpand"
                        IsPassword="True"
                        />
-            </StackLayout>
-            <StackLayout
+                </StackLayout>
+                <StackLayout
                 Orientation="Horizontal"
                 HorizontalOptions="FillAndExpand"
                 Padding="0"
                 >
-                <Button x:Name="btn_back_signup"
-                        HorizontalOptions="FillAndExpand"
-                        Clicked="btn_back_signup_Clicked"
-                        />
-                <Button x:Name="btn_send_signup"
+                    <Button x:Name="btn_send_signup"
                         HorizontalOptions="FillAndExpand"
                         Clicked="btn_send_signup_Clicked"
                         />
+                    <Button x:Name="btn_back_signup"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="btn_back_signup_Clicked"
+                        />
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
