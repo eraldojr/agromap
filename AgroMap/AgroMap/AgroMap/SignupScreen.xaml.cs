@@ -82,6 +82,7 @@ namespace AgroMap
                 {
                     await DisplayAlert(Strings.Success, Strings.SuccessSignup, Strings.OK);
                     BackToLogin();
+                    return;
                 }
                 else if (response_code == 400)
                 {

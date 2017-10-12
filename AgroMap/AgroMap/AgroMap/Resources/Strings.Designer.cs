@@ -89,11 +89,29 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error while sync with server.
+        ///   Looks up a localized string similar to Cancel sync.
+        /// </summary>
+        internal static string CancelSync {
+            get {
+                return ResourceManager.GetString("CancelSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot sync with server.
         /// </summary>
         internal static string CannotSync {
             get {
                 return ResourceManager.GetString("CannotSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checked.
+        /// </summary>
+        internal static string Checked {
+            get {
+                return ResourceManager.GetString("Checked", resourceCulture);
             }
         }
         
@@ -215,11 +233,11 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ends at.
+        ///   Looks up a localized string similar to Ends on.
         /// </summary>
-        internal static string EndAt {
+        internal static string EndsOn {
             get {
-                return ResourceManager.GetString("EndAt", resourceCulture);
+                return ResourceManager.GetString("EndsOn", resourceCulture);
             }
         }
         
@@ -229,6 +247,15 @@ namespace AgroMap.Resources {
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while getting data from sever. Try again.
+        /// </summary>
+        internal static string ErrorDeviceUUID {
+            get {
+                return ResourceManager.GetString("ErrorDeviceUUID", resourceCulture);
             }
         }
         
@@ -265,6 +292,15 @@ namespace AgroMap.Resources {
         internal static string Inspection {
             get {
                 return ResourceManager.GetString("Inspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        internal static string Kind {
+            get {
+                return ResourceManager.GetString("Kind", resourceCulture);
             }
         }
         
@@ -323,6 +359,15 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Map.
+        /// </summary>
+        internal static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must be the supervisor of this inspection to manage it.
         /// </summary>
         internal static string MustBeSupervisor {
@@ -377,6 +422,15 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Observation.
+        /// </summary>
+        internal static string Observation {
+            get {
+                return ResourceManager.GetString("Observation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         internal static string OK {
@@ -400,6 +454,15 @@ namespace AgroMap.Resources {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Problem.
+        /// </summary>
+        internal static string Problem {
+            get {
+                return ResourceManager.GetString("Problem", resourceCulture);
             }
         }
         
@@ -503,6 +566,15 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/inspection/get-uuid.
+        /// </summary>
+        internal static string ServerURIGetUUID {
+            get {
+                return ResourceManager.GetString("ServerURIGetUUID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/inspection/get-all.
         /// </summary>
         internal static string ServerURIInspectionAll {
@@ -566,7 +638,7 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://192.168.25.3:8000/.
+        ///   Looks up a localized string similar to https://murmuring-fjord-35648.herokuapp.com/.
         /// </summary>
         internal static string ServerURL {
             get {
@@ -620,11 +692,11 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Starts at.
+        ///   Looks up a localized string similar to Starts on.
         /// </summary>
-        internal static string StartAt {
+        internal static string StartOn {
             get {
-                return ResourceManager.GetString("StartAt", resourceCulture);
+                return ResourceManager.GetString("StartOn", resourceCulture);
             }
         }
         
@@ -683,7 +755,7 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error with your data. Do you already have an account?.
+        ///   Looks up a localized string similar to Error with your data. Check your data and try again..
         /// </summary>
         internal static string UserDataError {
             get {
@@ -697,6 +769,15 @@ namespace AgroMap.Resources {
         internal static string UserID {
             get {
                 return ResourceManager.GetString("UserID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The minimum length of name is 3 characters. The start date must be equal or higher than current date and the end date must be higher than start date..
+        /// </summary>
+        internal static string VerifyFieldsInspection {
+            get {
+                return ResourceManager.GetString("VerifyFieldsInspection", resourceCulture);
             }
         }
         

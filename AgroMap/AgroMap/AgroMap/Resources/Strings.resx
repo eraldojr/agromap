@@ -127,7 +127,10 @@
     <value>Cancel</value>
   </data>
   <data name="CannotSync" xml:space="preserve">
-    <value>Error while sync with server</value>
+    <value>Cannot sync with server</value>
+  </data>
+  <data name="Checked" xml:space="preserve">
+    <value>Checked</value>
   </data>
   <data name="Closed" xml:space="preserve">
     <value>Closed</value>
@@ -168,8 +171,8 @@
   <data name="EmptyFields" xml:space="preserve">
     <value>All fields are required</value>
   </data>
-  <data name="EndAt" xml:space="preserve">
-    <value>Ends at</value>
+  <data name="EndsOn" xml:space="preserve">
+    <value>Ends on</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
@@ -185,6 +188,9 @@
   </data>
   <data name="Inspection" xml:space="preserve">
     <value>Inspection</value>
+  </data>
+  <data name="Kind" xml:space="preserve">
+    <value>Type</value>
   </data>
   <data name="Last_Edit_At" xml:space="preserve">
     <value>Last edit at</value>
@@ -204,6 +210,9 @@
   <data name="Longitude" xml:space="preserve">
     <value>Longitude</value>
   </data>
+  <data name="Map" xml:space="preserve">
+    <value>Map</value>
+  </data>
   <data name="MustBeSupervisor" xml:space="preserve">
     <value>You must be the supervisor of this inspection to manage it</value>
   </data>
@@ -222,6 +231,9 @@
   <data name="NotSync" xml:space="preserve">
     <value>Not synced</value>
   </data>
+  <data name="Observation" xml:space="preserve">
+    <value>Observation</value>
+  </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -230,6 +242,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Problem" xml:space="preserve">
+    <value>Problem</value>
   </data>
   <data name="Quit" xml:space="preserve">
     <value>Quit</value>
@@ -286,7 +301,7 @@
     <value>/api/inspection/update</value>
   </data>
   <data name="ServerURL" xml:space="preserve">
-    <value>http://192.168.25.3:8000/</value>
+    <value>https://murmuring-fjord-35648.herokuapp.com/</value>
     <comment>Server URL</comment>
   </data>
   <data name="ServerURLBackup" xml:space="preserve">
@@ -304,8 +319,8 @@
   <data name="Sincronize" xml:space="preserve">
     <value>Sincronize</value>
   </data>
-  <data name="StartAt" xml:space="preserve">
-    <value>Starts at</value>
+  <data name="StartOn" xml:space="preserve">
+    <value>Starts on</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
@@ -326,12 +341,24 @@
     <value>An unexpected error has occurred</value>
   </data>
   <data name="UserDataError" xml:space="preserve">
-    <value>Error with your data. Do you already have an account?</value>
+    <value>Error with your data. Check your data and try again.</value>
   </data>
   <data name="UserID" xml:space="preserve">
     <value>User id</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
+  </data>
+  <data name="VerifyFieldsInspection" xml:space="preserve">
+    <value>The minimum length of name is 3 characters. The start date must be equal or higher than current date and the end date must be higher than start date.</value>
+  </data>
+  <data name="CancelSync" xml:space="preserve">
+    <value>Cancel sync</value>
+  </data>
+  <data name="ServerURIGetUUID" xml:space="preserve">
+    <value>/api/inspection/get-uuid</value>
+  </data>
+  <data name="ErrorDeviceUUID" xml:space="preserve">
+    <value>Error while getting data from sever. Try again</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgroMap.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,19 @@ namespace AgroMap
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EventMapScreen : ContentPage
     {
-        private EventTabScreen masterPage;
+        private EventTabScreen __masterPage;
+        private Event __event;
 
         public EventMapScreen(EventTabScreen __masterPage)
         {
             InitializeComponent();
-            this.masterPage = __masterPage;
+            this.__masterPage = __masterPage;
+        }
+        public EventMapScreen(EventTabScreen __masterPage, Event __event)
+        {
+            InitializeComponent();
+            this.__masterPage = __masterPage;
+            this.__event = __event;
         }
     }
 }

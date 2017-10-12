@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AgroMap.EventTabScreen">
   <!--Pages can be added as references or inline-->
-  <ContentPage x:Name="event_list_content_page" Title="Events"/>
-<ContentPage x:Name="event_map_content_page" Title="Map"/>
-<ContentPage x:Name="event_new_content_page" Title="New/Edit"/>
+  <ContentPage x:Name="event_list_content_page"/>
+<ContentPage x:Name="event_map_content_page"/>
+<ContentPage x:Name="event_new_content_page" Title="New"/>
 </TabbedPage>

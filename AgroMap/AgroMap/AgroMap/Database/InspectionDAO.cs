@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -14,15 +15,37 @@ namespace AgroMap.Database
     {
         private static string Table = "Inspection";
 
+        public static void DropTable()
+        {
+            SQLiteAsyncConnection db = Database.GetConn();
+            if (db == null)
+                return;
+            try
+            {
+                db.DropTableAsync<Inspection>().Wait();
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine("AGROMAP|InspectionDAO.cs|DropTable: " + err.Message);
+                return;
+            }
+        }
+
         // Busca todas inspeções salvas localmente
         public static async Task<List<Inspection>> GetAll()
         {
-
-            SQLiteAsyncConnection db = Database.GetConn();
-            if (db != null)
-                return await db.Table<Inspection>().ToListAsync();
-            Debug.WriteLine("AGROMAP|InspectionDAO.cs|GetLocalItens - Null");
-            return null;
+            try
+            {
+            CheckTable();
+                SQLiteAsyncConnection db = Database.GetConn();
+                if (db != null)
+                    return await db.Table<Inspection>().ToListAsync();
+            }catch(Exception err)
+            {
+                Debug.WriteLine("AGROMAP|InspectionDAO.cs|GetAll" + err.Message);
+            }
+            return new List<Inspection>();
+            
         }
 
         // Busca inspecao por ID
@@ -51,26 +74,33 @@ namespace AgroMap.Database
         {
 
             SQLiteAsyncConnection db = Database.GetConn();
-            if (db != null)
+            if (db == null)
+                return false;
+            CheckTable();
+            try
             {
-                try
+                List<Inspection> local_inspections = await GetAll();
+                foreach(Inspection local in local_inspections)
                 {
-                    db.DropTableAsync<Inspection>().Wait();
-                    db.CreateTableAsync<Inspection>().Wait();
-                    foreach (Inspection i in inspections)
+                    var result = inspections.Where(i => i.id == local.id);
+                    if(result.Count() == 0)
                     {
-                        await db.InsertAsync(i);
+                        await EventDAO.DeleteFromInspection(local.id);
                     }
-                    return true;
                 }
-                catch (Exception err)
+                db.DropTableAsync<Inspection>().Wait();
+                db.CreateTableAsync<Inspection>().Wait();
+                foreach (Inspection i in inspections)
                 {
-                    Debug.WriteLine("AGROMAP|InspectionDAO.cs|SaveInLocalStorage: " + err.Message);
-                    return false;
+                    await db.InsertAsync(i);
                 }
+                return true;
             }
-            Debug.WriteLine("AGROMAP|InspectionDAO.cs|SaveInLocalStorage - DBNull");
-            return false;
+            catch (Exception err)
+            {
+                Debug.WriteLine("AGROMAP|InspectionDAO.cs|SaveInLocalStorage: " + err.Message);
+                return false;
+            }
         }
 
         // Salva uma inspeção no armazenamento local
@@ -106,7 +136,7 @@ namespace AgroMap.Database
             SQLiteAsyncConnection db = Database.GetConn();
             if (db == null)
                 return false;
-            await CheckTable();
+            CheckTable();
             try
             {
                 await db.DeleteAsync(i);
@@ -120,14 +150,14 @@ namespace AgroMap.Database
         }
 
         //Verifica se a tabela existe. Se não, cria a tabela
-        private static async Task<Boolean> CheckTable()
+        private static Boolean CheckTable()
         {
             SQLiteAsyncConnection db = Database.GetConn();
             if (db == null)
                 return false;
             try
             {
-                await db.Table<Inspection>().Where(i => i.id == 0).FirstOrDefaultAsync();
+                db.Table<Inspection>().Where(i => i.id == 0).FirstOrDefaultAsync();
             }
             catch
             {

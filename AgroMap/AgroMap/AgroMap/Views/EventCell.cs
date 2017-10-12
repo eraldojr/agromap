@@ -1,4 +1,5 @@
-﻿using AgroMap.Resources;
+﻿using AgroMap.Entity;
+using AgroMap.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,11 +32,11 @@ namespace AgroMap.Views
 
             //Atribuindo valores e bindings
             lblID.Text = Strings.ID;
-            lblIDContent.SetBinding(Label.TextProperty, "id");
+            lblIDContent.SetBinding(Label.TextProperty, "uuid");
             lblUser.Text = Strings.UserID;
             lblUserContent.SetBinding(Label.TextProperty, "user");
             lblType.Text = Strings.Typeof;
-            lblTypeContent.SetBinding(Label.TextProperty, "types");
+            lblTypeContent.SetBinding(Label.TextProperty, "kind");
             lblLastEditAt.Text = Strings.Last_Edit_At;
             lblLastEditAtContent.SetBinding(Label.TextProperty, "last_edit_at");
 
@@ -63,34 +64,27 @@ namespace AgroMap.Views
             mainLayout.Children.Add(secondLine);
 
 
-            var details = new MenuItem { Text = Strings.Details };
-            details.SetBinding(MenuItem.CommandParameterProperty, new Binding("."));
-            details.Clicked += async (sender, e) =>
-            {
-                page.ListView_Events_Details(sender,e);
-            };
 
             var showonmap = new MenuItem { Text = Strings.ShowOnMap };
             showonmap.SetBinding(MenuItem.CommandParameterProperty, new Binding("."));
-            showonmap.Clicked += async (sender, e) => {
-                page.ListView_Events_ShowOnMap(sender, e);
+            showonmap.Clicked += (sender, e) => {
+                page.ListView_Events_ShowOnMap(((Event)BindingContext));
             };
 
             var edit = new MenuItem { Text = Strings.Edit };
             edit.SetBinding(MenuItem.CommandParameterProperty, new Binding("."));
-            edit.Clicked += async (sender, e) => {
-                page.ListView_Events_Edit(sender, e);
+            edit.Clicked += (sender, e) => {
+                page.ListView_Events_Edit(((Event)BindingContext));
             };
 
             var delete = new MenuItem { Text = Strings.Delete };
             delete.SetBinding(MenuItem.CommandParameterProperty, new Binding("."));
-            delete.Clicked += async (sender, e) => {
-                page.ListView_Events_Delete(sender, e);
+            delete.Clicked += (sender, e) => {
+                page.ListView_Events_Delete(((Event)BindingContext));
             };
 
-            ContextActions.Add(details);
-            ContextActions.Add(showonmap);
             ContextActions.Add(edit);
+            ContextActions.Add(showonmap);
             ContextActions.Add(delete);
 
             View = mainLayout;

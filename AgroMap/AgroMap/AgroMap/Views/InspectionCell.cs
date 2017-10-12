@@ -38,9 +38,9 @@ namespace AgroMap.Views
             lblIDContent.SetBinding(Label.TextProperty, "id");
             lblName.Text = Strings.Name;
             lblNameContent.SetBinding(Label.TextProperty, "name");
-            lblStart.Text = Strings.StartAt;
+            lblStart.Text = Strings.StartOn;
             lblStartContent.SetBinding(Label.TextProperty, "start_at");
-            lblEnd.Text = Strings.EndAt;
+            lblEnd.Text = Strings.EndsOn;
             lblEndContent.SetBinding(Label.TextProperty, "end_at");
 
             //Propriedades de Layout

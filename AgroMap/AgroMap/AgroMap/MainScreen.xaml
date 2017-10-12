@@ -4,7 +4,7 @@
              x:Class="AgroMap.MainScreen"
              xmlns:pages="clr-namespace:AgroMap">
   <MasterDetailPage.Master>
-    <pages:MainScreenMaster x:Name="MasterPage" />
+    <pages:MainScreenMaster x:Name="__masterPage" />
   </MasterDetailPage.Master>
   <MasterDetailPage.Detail>
     <NavigationPage>

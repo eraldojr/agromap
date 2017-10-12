@@ -1,6 +1,7 @@
 ﻿using AgroMap.Database;
 using AgroMap.Entity;
 using AgroMap.Resources;
+using AgroMap.Services;
 using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
@@ -70,6 +71,11 @@ namespace AgroMap
             int responseCode = await UserService.Signin(user);
             if (responseCode == 200)
             {
+                if (!await InspectionService.SetDeviceUUID())
+                {
+                    await DisplayAlert(Strings.Error, Strings.ErrorDeviceUUID, Strings.OK);
+                    return;
+                }
                 Navigation.InsertPageBefore(new MainScreen(), this);
                 actIndLogin.IsRunning = false;
                 await Navigation.PopAsync();

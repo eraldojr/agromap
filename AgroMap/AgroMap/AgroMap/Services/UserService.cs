@@ -39,7 +39,6 @@ namespace AgroMap
                 JObject json = new JObject();
                 json.Add("email", user.Email);
                 json.Add("password", user.Password);
-                //var hashAlgorithm = new Blake2B(512);
 
                 MultipartFormDataContent form = new MultipartFormDataContent();
                 form.Add(new StringContent(json.ToString()), "user");

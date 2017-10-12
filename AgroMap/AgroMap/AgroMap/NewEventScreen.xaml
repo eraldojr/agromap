@@ -4,34 +4,74 @@
              x:Class="AgroMap.NewEventScreen">
     <ContentPage.Content>
         <StackLayout
-            Orientation="Vertical">
+            Orientation="Vertical"
+            Padding="10"
+            >
             <Label x:Name="lbl_main"
+                   Font="25"
+                   HorizontalTextAlignment="Center"
                    HorizontalOptions="FillAndExpand"
-                   HorizontalTextAlignment="Center"/>
-            <StackLayout Orientation="Horizontal">
-                <Label x:Name="lbl_id"/>
-                <Entry x:Name="ent_id"
+                   TextColor="#125e68"
+                   />
+            <StackLayout Orientation="Vertical">
+                <Label x:Name="lbl_description"
+                       VerticalOptions="Center"
+                       FontSize="20"
+                       />
+                <Editor x:Name="ent_description"
                        HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"
+                        HeightRequest="70"
+                       FontSize="20"
                        />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Label x:Name="lbl_description"/>
-                <Entry x:Name="ent_description"
+                <Label x:Name="lbl_kind"
+                       VerticalOptions="Center"
+                       FontSize="20"
+                       />
+                <Picker x:Name="pck_kind"
+                        HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"
+                        SelectedIndex="0"
+                        />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label x:Name="lbl_latitude"
+                       VerticalOptions="Center"
+                       FontSize="20"
+                       />
+                <Entry x:Name="ent_latitude"
                        HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"
+                       FontSize="20"
                        />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Label x:Name="lbl_type"/>
-                <Entry x:Name="ent_type"
+                <Label x:Name="lbl_longitude"
+                       VerticalOptions="Center"
+                       FontSize="20"
+                       />
+                <Entry x:Name="ent_longitude"
                        HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"
+                       FontSize="20"
                        />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Button x:Name="btn_save"
                         HorizontalOptions="FillAndExpand"
+                        Clicked="Btn_save_Clicked"
+                        BackgroundColor="#23a1b2"
+                        TextColor="#FFF"
+                        VerticalOptions="Center"
                         />
                 <Button x:Name="btn_cancel"
                         HorizontalOptions="FillAndExpand"
+                        Clicked="Btn_cancel_Clicked"
+                        TextColor="#FFF"
+                        BackgroundColor="#f44b42"
+                        VerticalOptions="Center"
                         />
             </StackLayout>
 

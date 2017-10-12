@@ -18,68 +18,68 @@ namespace AgroMap
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EventListScreen : ContentPage
     {
-        public EventTabScreen masterPage { get; set; }
+        public EventTabScreen __masterPage { get; set; }
 
-        public EventListScreen(EventTabScreen masterPage)
+        public EventListScreen(EventTabScreen __masterPage)
         {
-            this.masterPage = masterPage;
+            this.__masterPage = __masterPage;
             InitializeComponent();
             InitComponents();
-            LoadEvents();
-            
-        }
-
-        override
-        protected void OnAppearing()
-        {
-            LoadEvents();
-        }
-
-        private void EventListScreen_Focused(object sender, FocusEventArgs e)
-        {
             LoadEvents();
         }
 
         private void InitComponents()
         {
             lbl_events.Text = Strings.Events;
-            lbl_inspection_name.Text = this.masterPage.inspection.name;
-
-
+            lbl_inspection_name.Text = this.__masterPage.inspection.name;
             list_view_events.ItemTemplate = new DataTemplate(() => {return new EventCell(this); });
             Command RefreshListCommand = new Command(() => LoadEvents());
             list_view_events.RefreshCommand = RefreshListCommand;
         }
 
-        private async void LoadEvents() 
+        public async void LoadEvents() 
         {
-            list_view_events.ItemsSource = await EventDAO.GetEventsByInspection(this.masterPage.inspection.id);
-            list_view_events.IsRefreshing = false;
+            try
+            {
+                list_view_events.ItemsSource = await EventDAO.GetEventsByInspection(this.__masterPage.inspection.id); 
+                list_view_events.IsRefreshing = false;
+            }
+            catch (Exception err)
+            {
+
+                Debug.WriteLine("AGROMAP|EventListScreen.cs|LoadEvents: " + err.Message);
+            }
             return;
             
         }
 
         public void ListView_Events_Details(object sender, EventArgs e)
         {
-            masterPage.CurrentPage = masterPage.Children[2];
+            __masterPage.CurrentPage = __masterPage.Children[2];
         }
 
-        public void ListView_Events_Delete(object sender, EventArgs e)
+        public void ListView_Events_Edit(Event __event)
         {
-
-        }
-        public async void ListView_Events_Edit(object sender, EventArgs e)
-        {
-            
-        }
-        public void ListView_Events_ShowOnMap(object sender, EventArgs e)
-        {
-
+            __masterPage.Children.Remove(__masterPage.Children[2]);
+            __masterPage.Children.Add(new NewEventScreen(this.__masterPage, __event));
+            __masterPage.Children[2].Title = Strings.Edit;
+            __masterPage.CurrentPage = __masterPage.Children[2];
         }
 
-        private void btn_new_event_Clicked(object sender, EventArgs e)
+        public void ListView_Events_ShowOnMap(Event __event)
         {
-            masterPage.CurrentPage = masterPage.Children[2];
+            Navigation.PushAsync(new EventMapScreen(this.__masterPage, __event));
+        }
+
+        public async void ListView_Events_Delete(Event __event)
+        {
+            await EventDAO.Delete(__event);
+            return;
+        }
+
+        private void list_view_events_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            Event __event = e.Item as Event;
         }
     }
 }

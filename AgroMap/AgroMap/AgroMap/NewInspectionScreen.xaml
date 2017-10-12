@@ -3,36 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AgroMap.NewInspectionScreen">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical">
+        <StackLayout Orientation="Vertical"
+                     Padding="10"
+                     >
             <Label x:Name="lbl_main"
                    Font="25"
                    HorizontalTextAlignment="Center"
                    HorizontalOptions="FillAndExpand"
+                   TextColor="#125e68"
                    />
+            <ActivityIndicator x:Name="actInspectionScreen" Color="Red" IsRunning="false" IsVisible="False" />
             <StackLayout
-                Orientation="Horizontal">
-                <Label x:Name="lbl_name"/>
-                <Entry x:Name="ent_name"
-                       HorizontalOptions="FillAndExpand"
-                       />
-            </StackLayout>
-            <StackLayout
-                Orientation="Horizontal"
-                HorizontalOptions="FillAndExpand">
-                <Label x:Name="lbl_start"/>
-                <DatePicker x:Name="pck_start"
-                            HorizontalOptions="FillAndExpand"
-                            />
-                <Label x:Name="lbl_end"/>
-                <DatePicker x:Name="pck_end"
-                            HorizontalOptions="FillAndExpand"                            
-                            />
-            </StackLayout>
+                Orientation="Vertical"
+                x:Name="layout_itens"
+                >
+                <StackLayout
+                    Orientation="Horizontal">
+                    <Label x:Name="lbl_name"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           />
+                    <Entry x:Name="ent_name"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Center"
+                           />
+                </StackLayout>
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand">
+                    <Label x:Name="lbl_start"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           />
+                    <DatePicker x:Name="pck_start"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="Center"
+                                />
+                </StackLayout>
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand">
+                    
+                    <Label x:Name="lbl_end"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           />
+                    <DatePicker x:Name="pck_end"
+                                HorizontalOptions="FillAndExpand"    
+                                VerticalOptions="Center"
+                                />
+                </StackLayout>
             <StackLayout>
-                <Button x:Name="btn_save"/>
-                <Button x:Name="btn_cancel"/>
+                    <Button x:Name="btn_save"
+                            BackgroundColor="#23a1b2"
+                            TextColor="#FFF"
+                            />
+                    <Button x:Name="btn_cancel"
+                            BackgroundColor="#f44b42"
+                            TextColor="#FFF"
+                            />
+                </StackLayout>
             </StackLayout>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

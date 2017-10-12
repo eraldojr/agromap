@@ -129,6 +129,9 @@
   <data name="CannotSync" xml:space="preserve">
     <value>Erro ao sincronizar</value>
   </data>
+  <data name="Checked" xml:space="preserve">
+    <value>Verificado</value>
+  </data>
   <data name="Closed" xml:space="preserve">
     <value>Fechado</value>
   </data>
@@ -186,6 +189,9 @@
   <data name="Inspection" xml:space="preserve">
     <value>Inspeção</value>
   </data>
+  <data name="Kind" xml:space="preserve">
+    <value>Tipos</value>
+  </data>
   <data name="Last_Edit_At" xml:space="preserve">
     <value>Última edição em</value>
   </data>
@@ -203,6 +209,9 @@
   </data>
   <data name="Longitude" xml:space="preserve">
     <value>Longitude</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Mapa</value>
   </data>
   <data name="MustBeSupervisor" xml:space="preserve">
     <value>Você precisa ser o supervisor desta inspeção para gerenciá-la</value>
@@ -222,6 +231,9 @@
   <data name="NotSync" xml:space="preserve">
     <value>Não sincronizado</value>
   </data>
+  <data name="Observation" xml:space="preserve">
+    <value>Observação</value>
+  </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -230,6 +242,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Senha</value>
+  </data>
+  <data name="Problem" xml:space="preserve">
+    <value>Problema</value>
   </data>
   <data name="Quit" xml:space="preserve">
     <value>Sair</value>
@@ -330,5 +345,14 @@
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Aviso</value>
+  </data>
+  <data name="VerifyFieldsInspection" xml:space="preserve">
+    <value>O campo nome precisa ser maior que 3 caracteres. A data de início não deve ser menor que a data atual e a data de fim não pode ser menor que a data de início.</value>
+  </data>
+  <data name="CancelSync" xml:space="preserve">
+    <value>Cancelar sincronização</value>
+  </data>
+  <data name="ErrorDeviceUUID" xml:space="preserve">
+    <value>Erro ao buscar informações do servidor. Tente novamente.</value>
   </data>
 </root>

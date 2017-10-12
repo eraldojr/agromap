@@ -15,7 +15,7 @@ namespace AgroMap
         public MainScreen()
         {
             InitializeComponent();
-            MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+            __masterPage.ListView.ItemSelected += ListView_ItemSelected;
             
             NavigationPage.SetHasNavigationBar(this, false);
         }

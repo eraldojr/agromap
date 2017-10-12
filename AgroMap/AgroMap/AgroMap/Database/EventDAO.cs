@@ -1,10 +1,12 @@
 ﻿using AgroMap.Entity;
+using AgroMap.Services;
 using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -13,7 +15,23 @@ namespace AgroMap.Database
     public static class EventDAO
     {
         private static string Table = "Event";
-        
+
+        public static void DropTable()
+        {
+            SQLiteAsyncConnection db = Database.GetConn();
+            if (db == null)
+                return;
+            try
+            {
+                db.DropTableAsync<Event>().Wait();
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine("AGROMAP|EventDAO.cs|DropTable: " + err.Message);
+                return;
+            }
+        }
+
         //Retorna todos eventos de todas as inspeções
         public static async Task<List<Event>> GetAll()
         {
@@ -35,7 +53,20 @@ namespace AgroMap.Database
             {
                 string sql = String.Format("SELECT * FROM {0} WHERE inspection = {1}", Table, inspection);
 
-                return await db.QueryAsync<Event>(sql);
+                List<Event> list =  await db.QueryAsync<Event>(sql);
+                int list_length = list.Count;
+                for (int i = 0; i < list_length; i++)
+                {
+                    if (list.ElementAt(i).latitude.Equals("delete"))
+                    {
+                        list.RemoveAt(i);
+                        i--;
+                        list_length--;
+
+                    }
+                }
+
+                return list;
             }
             catch (Exception err)
             {
@@ -45,6 +76,7 @@ namespace AgroMap.Database
         }
 
         // Retorna todos eventos marcados como não sincronizados
+        // Não sincronizados: synced = 0
         public static async Task<List<Event>> GetUnsyncedByInspection(int inspection)
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -53,10 +85,11 @@ namespace AgroMap.Database
             await CheckTable();
             try
             {
-
                 string sql = String.Format("SELECT * FROM {0} WHERE inspection = {1} AND synced = 0", Table, inspection);
 
-                return await db.QueryAsync<Event>(sql);
+                List<Event> list =  await db.QueryAsync<Event>(sql);
+
+                return list;
             }
             catch (Exception err)
             {
@@ -66,7 +99,7 @@ namespace AgroMap.Database
         }
 
         // Busca evento pelo id
-        public static async Task<Event> GetByID(int id)
+        public static async Task<Event> GetByID(string id)
         {
             SQLiteAsyncConnection db = Database.GetConn();
             if (db == null)
@@ -75,31 +108,12 @@ namespace AgroMap.Database
 
             try
             {
-                return await db.Table<Event>().Where(i => i.id == id).FirstOrDefaultAsync();
+                return await db.Table<Event>().Where(i => i.uuid == id).FirstOrDefaultAsync();
             }
             catch (Exception err)
             {
                 Debug.WriteLine("AGROMAP|EventDAO.cs|GetByID: " + err.Message);
                 return null;
-            }
-        }
-
-        // Atualiza um evento e o marca como não sincronizado
-        public static async Task<Boolean> Update(Event item)
-        {
-            SQLiteAsyncConnection db = Database.GetConn();
-            if (db == null)
-                return false;
-            await CheckTable();
-            try
-            {
-                await db.UpdateAsync(item);
-                return true;
-            }
-            catch (Exception err)
-            {
-                Debug.WriteLine("AGROMAP|EventDAO.cs|Update: " + err.Message);
-                return false;
             }
         }
 
@@ -115,8 +129,15 @@ namespace AgroMap.Database
             {
                 foreach(Event e in events)
                 {
-                    e.synced = 1;
-                    await db.UpdateAsync(e);
+                    if (e.latitude.Equals("delete"))
+                    {
+                        await db.DeleteAsync(e);
+                    }
+                    else
+                    {
+                        e.synced = 1;
+                        await db.UpdateAsync(e);
+                    }
                 }
                 return true;
             }
@@ -127,7 +148,7 @@ namespace AgroMap.Database
             }
         }
 
-        // Cria um evento
+        // Cria ou atualiza um evento
         public static async Task<Boolean> Create(Event item)
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -136,18 +157,16 @@ namespace AgroMap.Database
             await CheckTable();
             try
             {
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            try
-            {
-                await db.InsertAsync(item);
+                if (item.uuid.Equals(""))
+                {
+                    item.uuid = GetNewID();
+                    await db.InsertAsync(item);
+                }
+                else
+                {
+                    await db.UpdateAsync(item);
+                }
                 return true;
-
             }
             catch (Exception err)
             {
@@ -156,7 +175,41 @@ namespace AgroMap.Database
             }
         }
 
+        // Atualiza um evento
+        public static async Task<Boolean> Update(Event item)
+        {
+            SQLiteAsyncConnection db = Database.GetConn();
+            if (db == null)
+                return false;
+            await CheckTable();
+            try
+            {
+                await db.UpdateAsync(item);
+                return true;
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine("AGROMAP|EventDAO.cs|Update:: " + err.Message);
+                return false;
+            }
+        }
+
+        public static string GetNewID()
+        {
+            var uuid = InspectionService.GetDeviceUUID();
+            int max_id = Convert.ToInt32(InspectionService.GetMaxID());
+            if (uuid.Equals(""))
+                return null;
+            var new_id = uuid + max_id;
+            return new_id;
+
+        }
+
         // Exclui um evento pelo id
+        // Atribui o valor 'delete' em latitude, assim não será mais exibido na lista
+        // Atribui synced como 0 para ser enviado ao server
+        // No server, com a latitude 'delete' será excluido
+        // Após ser enviado, o método setsynced é chamado e o exclui de fato
         public static async Task<Boolean> Delete(Event item)
         {
             SQLiteAsyncConnection db = Database.GetConn();
@@ -165,7 +218,9 @@ namespace AgroMap.Database
             await CheckTable();
             try
             {
-                await db.DeleteAsync(item);
+                item.latitude = "delete";
+                item.synced = 0;
+                await db.UpdateAsync(item);
                 return true;
             }
             catch (Exception err)
@@ -195,8 +250,8 @@ namespace AgroMap.Database
             }
         }
 
-        // Exclui todos eventos de uma lista e salva novos registros
-        public static async Task<Boolean> SaveList(List<Event> events, int inspection)
+        // Recebe uma lista de eventos para serem armazenados
+        public static async Task<Boolean> SaveList(List<Event> events)
         {
             SQLiteAsyncConnection db = Database.GetConn();
             if (db == null)
@@ -204,10 +259,6 @@ namespace AgroMap.Database
             await CheckTable();
             try
             {
-                //Limpa tabela e armazena apenas o que foi sincronizado com o servidor
-                string sql = String.Format("DELETE FROM {0} WHERE inspection = {1}", Table, inspection);
-                await db.QueryAsync<Event>(sql);
-
                 // Se lista vazia, retorna
                 if (events == null || events.Count == 0)
                     return true;
@@ -215,13 +266,13 @@ namespace AgroMap.Database
                 foreach (Event e in events)
                 {
                     e.synced = 1;
-                    await Create(e);
+                    await db.InsertAsync(e);
                 }
                 return true;
             }
             catch (Exception err)
             {
-                Debug.WriteLine("AGROMAP|EventDAO.cs|SaveInLocalStorage: " + err.Message);
+                Debug.WriteLine("AGROMAP|EventDAO.cs|SaveList: " + err.Message);
                 return false;
             }
         }
@@ -234,7 +285,9 @@ namespace AgroMap.Database
                 return false;
             try
             {
-                await db.Table<Event>().Where(i => i.id == 0).FirstOrDefaultAsync();
+                var database = db.Table<Event>();
+                await database.CountAsync();
+                //await db.Table<Event>().Where(i => i.id == "").FirstOrDefaultAsync();
             }
             catch
             {
