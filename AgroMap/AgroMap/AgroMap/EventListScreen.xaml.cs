@@ -58,23 +58,46 @@ namespace AgroMap
             __masterPage.CurrentPage = __masterPage.Children[2];
         }
 
-        public void ListView_Events_Edit(Event __event)
+        public async void ListView_Events_Edit(Event __event)
         {
-            __masterPage.Children.Remove(__masterPage.Children[2]);
-            __masterPage.Children.Add(new NewEventScreen(this.__masterPage, __event));
-            __masterPage.Children[2].Title = Strings.Edit;
-            __masterPage.CurrentPage = __masterPage.Children[2];
+            int userID = UserService.GetLoggedUserId();
+            if (__event.user == userID || __masterPage.inspection.supervisor == userID)
+            {
+                __masterPage.Children.Remove(__masterPage.Children[2]);
+                __masterPage.new_event_screen = new NewEventScreen(this.__masterPage, __event);
+                __masterPage.Children.Add(__masterPage.new_event_screen);
+                __masterPage.Children[2].Title = Strings.Edit;
+                __masterPage.CurrentPage = __masterPage.Children[2];
+                return;
+            }
+            else
+            {
+                await DisplayAlert(Strings.Unauthorized, Strings.MustBeCreatorOrSupervisor, Strings.OK);
+                return;
+            }
+           
         }
 
         public void ListView_Events_ShowOnMap(Event __event)
         {
-            Navigation.PushAsync(new EventMapScreen(this.__masterPage, __event));
+            __masterPage.ShowEventOnMap(__event);
         }
 
         public async void ListView_Events_Delete(Event __event)
         {
-            await EventDAO.Delete(__event);
-            return;
+            int userID = UserService.GetLoggedUserId();
+            if(__event.user == userID || __masterPage.inspection.supervisor == userID)
+            {
+                await EventDAO.Delete(__event);
+                LoadEvents();
+                return;
+            }
+            else
+            {
+                await DisplayAlert(Strings.Unauthorized, Strings.MustBeCreatorOrSupervisor, Strings.OK);
+                return;
+            }
+
         }
 
         private void list_view_events_ItemTapped(object sender, ItemTappedEventArgs e)

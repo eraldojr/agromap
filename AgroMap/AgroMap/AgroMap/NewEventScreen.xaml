@@ -21,7 +21,8 @@
                 <Editor x:Name="ent_description"
                        HorizontalOptions="FillAndExpand"
                        VerticalOptions="Center"
-                        HeightRequest="70"
+                       HeightRequest="70"
+                        Text=""
                        FontSize="20"
                        />
             </StackLayout>
@@ -36,28 +37,25 @@
                         SelectedIndex="0"
                         />
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label x:Name="lbl_latitude"
-                       VerticalOptions="Center"
-                       FontSize="20"
-                       />
-                <Entry x:Name="ent_latitude"
-                       HorizontalOptions="FillAndExpand"
-                       VerticalOptions="Center"
-                       FontSize="20"
-                       />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label x:Name="lbl_longitude"
-                       VerticalOptions="Center"
-                       FontSize="20"
-                       />
-                <Entry x:Name="ent_longitude"
-                       HorizontalOptions="FillAndExpand"
-                       VerticalOptions="Center"
+            
+            <StackLayout Orientation="Vertical">
+                <Image x:Name="img_checked"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="50"/>
+                <ActivityIndicator
+                    x:Name="actInd_Location"
+                    HorizontalOptions="CenterAndExpand"
+                    Color="#125e68"
+                    IsRunning="True"
+                    IsVisible="True"
+                    />
+                
+                <Label x:Name="lbl_location"
+                       HorizontalOptions="CenterAndExpand"
                        FontSize="20"
                        />
             </StackLayout>
+           
             <StackLayout Orientation="Horizontal">
                 <Button x:Name="btn_save"
                         HorizontalOptions="FillAndExpand"

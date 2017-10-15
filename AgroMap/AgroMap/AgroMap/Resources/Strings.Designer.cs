@@ -341,6 +341,24 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Location found.
+        /// </summary>
+        internal static string LocationFound {
+            get {
+                return ResourceManager.GetString("LocationFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Still looking for location. Please wait..
+        /// </summary>
+        internal static string LocationNotFound {
+            get {
+                return ResourceManager.GetString("LocationNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logout.
         /// </summary>
         internal static string Logout {
@@ -364,6 +382,15 @@ namespace AgroMap.Resources {
         internal static string Map {
             get {
                 return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must be the creator of this event or supervisor of this inspection..
+        /// </summary>
+        internal static string MustBeCreatorOrSupervisor {
+            get {
+                return ResourceManager.GetString("MustBeCreatorOrSupervisor", resourceCulture);
             }
         }
         
@@ -481,6 +508,15 @@ namespace AgroMap.Resources {
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching location....
+        /// </summary>
+        internal static string SearchingLocation {
+            get {
+                return ResourceManager.GetString("SearchingLocation", resourceCulture);
             }
         }
         
@@ -728,6 +764,15 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Try again.
+        /// </summary>
+        internal static string TryAgain {
+            get {
+                return ResourceManager.GetString("TryAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         internal static string Typeof {
@@ -787,6 +832,15 @@ namespace AgroMap.Resources {
         internal static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You.
+        /// </summary>
+        internal static string You {
+            get {
+                return ResourceManager.GetString("You", resourceCulture);
             }
         }
     }

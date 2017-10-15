@@ -45,6 +45,7 @@ namespace AgroMap.Views
             mainLayout.Orientation = StackOrientation.Vertical;
             firstLine.Orientation = StackOrientation.Horizontal;
             secondLine.Orientation = StackOrientation.Horizontal;
+            thirdLine.Orientation = StackOrientation.Horizontal;
 
 
             //Adicionando itens aos layouts
@@ -57,11 +58,13 @@ namespace AgroMap.Views
             secondLine.Children.Add(lblType);
             secondLine.Children.Add(lblTypeContent);
 
-            secondLine.Children.Add(lblLastEditAt);
-            secondLine.Children.Add(lblLastEditAtContent);
+
+            thirdLine.Children.Add(lblLastEditAt);
+            thirdLine.Children.Add(lblLastEditAtContent);
 
             mainLayout.Children.Add(firstLine);
             mainLayout.Children.Add(secondLine);
+            mainLayout.Children.Add(thirdLine);
 
 
 

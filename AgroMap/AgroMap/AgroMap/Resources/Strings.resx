@@ -361,4 +361,22 @@
   <data name="ErrorDeviceUUID" xml:space="preserve">
     <value>Error while getting data from sever. Try again</value>
   </data>
+  <data name="LocationNotFound" xml:space="preserve">
+    <value>Still looking for location. Please wait.</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="You" xml:space="preserve">
+    <value>You</value>
+  </data>
+  <data name="SearchingLocation" xml:space="preserve">
+    <value>Searching location...</value>
+  </data>
+  <data name="LocationFound" xml:space="preserve">
+    <value>Location found</value>
+  </data>
+  <data name="MustBeCreatorOrSupervisor" xml:space="preserve">
+    <value>Must be the creator of this event or supervisor of this inspection.</value>
+  </data>
 </root>

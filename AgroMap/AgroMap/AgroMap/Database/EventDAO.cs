@@ -52,8 +52,10 @@ namespace AgroMap.Database
             try
             {
                 string sql = String.Format("SELECT * FROM {0} WHERE inspection = {1}", Table, inspection);
-
+                
                 List<Event> list =  await db.QueryAsync<Event>(sql);
+                if (list == null)
+                    return new List<Event>();
                 int list_length = list.Count;
                 for (int i = 0; i < list_length; i++)
                 {
@@ -226,6 +228,24 @@ namespace AgroMap.Database
             catch (Exception err)
             {
                 Debug.WriteLine("AGROMAP|EventDAO.cs|Delete: " + err.Message);
+                return false;
+            }
+        }
+
+        public static async Task<Boolean> DeleteFromId(string uuid)
+        {
+            SQLiteAsyncConnection db = Database.GetConn();
+            if (db == null)
+            await CheckTable();
+            try
+            {
+                string sql = String.Format("DELETE FROM {0} WHERE uuid = '{1}'", Table, uuid);
+                await db.QueryAsync<Event>(sql);
+                return true;
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine("AGROMAP|EventDAO.cs|DeleteFromId: " + err.Message);
                 return false;
             }
         }

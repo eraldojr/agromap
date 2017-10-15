@@ -27,7 +27,8 @@ namespace AgroMap
         {
             InitializeComponent();
             InitComponents();
-            LoadInspections();
+            //LoadInspections();
+
         }
 
         override
@@ -63,6 +64,7 @@ namespace AgroMap
         // Se não houver conexão, exibe dados do armazenamento local
         private async void LoadInspections()
         {
+            //await EventDAO.DeleteFromId("VPT370");
             if (isRefreshing)
                 return;
             isRefreshing = true;

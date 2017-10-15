@@ -20,6 +20,7 @@
                 />
             <ListView x:Name="list_view_events"
                           IsPullToRefreshEnabled="True"
+                          HasUnevenRows="True"
                           ItemTapped="list_view_events_ItemTapped"
                       >
                 <ListView.ItemTemplate >

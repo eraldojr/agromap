@@ -355,4 +355,22 @@
   <data name="ErrorDeviceUUID" xml:space="preserve">
     <value>Erro ao buscar informações do servidor. Tente novamente.</value>
   </data>
+  <data name="LocationNotFound" xml:space="preserve">
+    <value>Ainda buscando localização. Por favor aguarde.</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Tentar novamente</value>
+  </data>
+  <data name="You" xml:space="preserve">
+    <value>Você</value>
+  </data>
+  <data name="SearchingLocation" xml:space="preserve">
+    <value>Buscando localização...</value>
+  </data>
+  <data name="LocationFound" xml:space="preserve">
+    <value>Localização encontrada</value>
+  </data>
+  <data name="MustBeCreatorOrSupervisor" xml:space="preserve">
+    <value>Necessário ser criador do evento ou supervisor da inspeção.</value>
+  </data>
 </root>

@@ -10,6 +10,8 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using PCLCrypto;
+using static PCLCrypto.WinRTCrypto;
 
 namespace AgroMap
 {
@@ -22,10 +24,12 @@ namespace AgroMap
                 if (CrossSettings.IsSupported)
                     return CrossSettings.Current;
 
-                return null; // or your custom implementation 
+                return null;
             }
         }
 
+        // Efetua login
+        // Se retornar sucesso, salva os dados do usuário em 'sessão'
         public static async Task<int> Signin(User user)
         {
             HttpResponseMessage response = null;
@@ -67,9 +71,9 @@ namespace AgroMap
                 Debug.WriteLine("AGROMAP|UserService.cs|Signin: " + e.Message);
             }
             return (int)response.StatusCode;
-
         }
 
+        // Efetua cadastro
         public static async Task<int> Signup(User user)
         {
             try
@@ -104,6 +108,7 @@ namespace AgroMap
             }
         }
 
+        // Salva os dados do usuário em 'sessão'
         public static Boolean SaveUserSession(User user)
         {
             try
@@ -119,10 +124,10 @@ namespace AgroMap
                 Debug.WriteLine("AGROMAP|UserService.cs|SaveUserSession: " + e.Message);
                 return false;
             }
-
             return true;
         }
 
+        // Carrega dados do usuário salvos em 'sessão'
         public static User LoadUserSession()
         {
             try
@@ -151,6 +156,7 @@ namespace AgroMap
             
         }
 
+        // Retorna id do usuário logado
         public static int GetLoggedUserId()
         {
             try
@@ -165,6 +171,7 @@ namespace AgroMap
 
         }
 
+        // Elimina dados de 'sessão' do usuário
         public static void Logout()
         {
             try
@@ -181,6 +188,5 @@ namespace AgroMap
                 Debug.WriteLine("AGROMAP|UserService.cs|Logout: " + e.Message);
             }
         }
-
     }
 }
