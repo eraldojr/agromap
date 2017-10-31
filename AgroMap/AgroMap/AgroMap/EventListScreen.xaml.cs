@@ -88,7 +88,7 @@ namespace AgroMap
             int userID = UserService.GetLoggedUserId();
             if(__event.user == userID || __masterPage.inspection.supervisor == userID)
             {
-                await EventDAO.Delete(__event);
+                await EventDAO.Delete(__event.uuid);
                 LoadEvents();
                 return;
             }

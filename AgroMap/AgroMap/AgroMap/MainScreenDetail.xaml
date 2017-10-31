@@ -5,5 +5,13 @@
              Title="AgroMap">
     <StackLayout Padding="10">
         <Label Text="Bem vindo ao AgroMap!"/>
+        <Button x:Name="btn_upload"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="btn_upload_Clicked"
+                        Text="Upload"
+                        TextColor="#FFF"
+                        BackgroundColor="#d1a93c"
+                        VerticalOptions="Center"
+                        />
     </StackLayout>
 </ContentPage>

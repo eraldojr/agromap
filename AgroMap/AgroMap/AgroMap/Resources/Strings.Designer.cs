@@ -80,6 +80,42 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AKIAI3PMR5WMUO44XBCA.
+        /// </summary>
+        internal static string AWS_ACCESS_KEY_ID {
+            get {
+                return ResourceManager.GetString("AWS_ACCESS_KEY_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to agromapproject.
+        /// </summary>
+        internal static string AWS_BUCKET_NAME {
+            get {
+                return ResourceManager.GetString("AWS_BUCKET_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to us-east-2:65688d83-bb43-4a82-80fd-56de0731d99e.
+        /// </summary>
+        internal static string AWS_COGNITO_POOL_ID {
+            get {
+                return ResourceManager.GetString("AWS_COGNITO_POOL_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to o6rlCRLyVrDIJ8H06TyIxFkgkyCoExwbGA+HKIyr.
+        /// </summary>
+        internal static string AWS_SECRET_ACCESS_KEY {
+            get {
+                return ResourceManager.GetString("AWS_SECRET_ACCESS_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {
@@ -94,6 +130,15 @@ namespace AgroMap.Resources {
         internal static string CancelSync {
             get {
                 return ResourceManager.GetString("CancelSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot save the photo.
+        /// </summary>
+        internal static string CannotSavePhoto {
+            get {
+                return ResourceManager.GetString("CannotSavePhoto", resourceCulture);
             }
         }
         
@@ -287,6 +332,15 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Insert photo from gallery.
+        /// </summary>
+        internal static string InsertPhoto {
+            get {
+                return ResourceManager.GetString("InsertPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inspection.
         /// </summary>
         internal static string Inspection {
@@ -355,6 +409,15 @@ namespace AgroMap.Resources {
         internal static string LocationNotFound {
             get {
                 return ResourceManager.GetString("LocationNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location permission not granted..
+        /// </summary>
+        internal static string LocationNotGranted {
+            get {
+                return ResourceManager.GetString("LocationNotGranted", resourceCulture);
             }
         }
         
@@ -499,6 +562,15 @@ namespace AgroMap.Resources {
         internal static string Quit {
             get {
                 return ResourceManager.GetString("Quit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to agromapproject.
+        /// </summary>
+        internal static string S3_Bucket {
+            get {
+                return ResourceManager.GetString("S3_Bucket", resourceCulture);
             }
         }
         
@@ -796,6 +868,15 @@ namespace AgroMap.Resources {
         internal static string UnexpectedError {
             get {
                 return ResourceManager.GetString("UnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload.
+        /// </summary>
+        internal static string Upload {
+            get {
+                return ResourceManager.GetString("Upload", resourceCulture);
             }
         }
         

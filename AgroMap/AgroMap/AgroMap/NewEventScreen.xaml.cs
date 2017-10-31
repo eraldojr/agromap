@@ -1,18 +1,15 @@
 ﻿using AgroMap.Database;
 using AgroMap.Entity;
 using AgroMap.Resources;
-using AgroMap.Services;
-using Plugin.Connectivity;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
 using Xamarin.Forms;
+using Android.Content.PM;
+using System.Diagnostics;
 using Xamarin.Forms.Xaml;
+using AgroMap.Services;
+using Android;
+using System.Threading.Tasks;
+using System.IO;
 
 namespace AgroMap
 {
@@ -23,6 +20,12 @@ namespace AgroMap
         private EventTabScreen __masterPage;
         private string latitude = "";
         private string longitude = "";
+        private static string coarseLocation = Manifest.Permission.AccessCoarseLocation;
+        private static string fineLocation = Manifest.Permission.AccessFineLocation;
+        private static string storage_write = Manifest.Permission.WriteExternalStorage;
+        private static string storage_read = Manifest.Permission.ReadExternalStorage;
+        private Image event_image;
+        private bool hasPhoto;
 
         public NewEventScreen(EventTabScreen __masterPage)
         {
@@ -58,11 +61,15 @@ namespace AgroMap
 
             btn_save.Text = Strings.Save;
             btn_cancel.Text = Strings.Cancel;
-            
+
+            btn_gallery.Text = Strings.InsertPhoto;
+
         }
 
         public async void GetLocation()
         {
+            CheckLocationPermission();
+
             img_checked.IsVisible = false;
             actInd_Location.IsVisible = true;
             lbl_location.Text = Strings.SearchingLocation;
@@ -85,6 +92,39 @@ namespace AgroMap
 
         }
 
+        private static Boolean CheckLocationPermission()
+        {
+            try
+            {
+                DependencyService.Get<IGetPermission>().CheckPermission(fineLocation);
+                DependencyService.Get<IGetPermission>().CheckPermission(coarseLocation);
+                return true;
+
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine("AGROMAP|NewEventScreen.cs|CheckLocationPermission: " + err.Message);
+            }
+            return false;
+            
+        }
+        
+        private static Boolean CheckStoragePermission()
+        {
+            try
+            {
+                DependencyService.Get<IGetPermission>().CheckPermission(storage_read);
+                DependencyService.Get<IGetPermission>().CheckPermission(storage_write);
+                return true;
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine("AGROMAP|NewEventScreen.cs|CheckStoragePermission: " + err.Message);
+            }
+            return false;
+
+        }
+
         private void SetLocationFound()
         {
             actInd_Location.IsVisible = false;
@@ -95,10 +135,14 @@ namespace AgroMap
 
         public void SetEditableEvent()
         {
-            if (this.__event == null)
+            if (__event == null)
                 return;
             lbl_main.Text = Strings.Edit + " " + Strings.Event;
             ent_description.Text = __event.description;
+            latitude = __event.latitude;
+            longitude = __event.longitude;
+            RetrievePhoto(__event.uuid);
+
         }
 
         private async void Btn_save_Clicked(object sender, EventArgs e)
@@ -112,12 +156,11 @@ namespace AgroMap
                     return;
                 }
             }
-            catch(Exception err)
+            catch(Exception)
             {
                 await DisplayAlert(Strings.Warning, Strings.LocationNotFound, Strings.OK);
                 return;
             }
-            
 
             try
             {
@@ -127,7 +170,6 @@ namespace AgroMap
                     __event.kind = __event.kind;
                     __event.description = ent_description.Text;
                     __event.last_edit_at = DateTime.Now;
-                    __event.synced = 0;
                 }
                 else
                 {
@@ -165,6 +207,23 @@ namespace AgroMap
             }
         }
 
+        private void RetrievePhoto(string uuid)
+        {
+            ImageSource imgSrc = PhotoService.RetrievePhoto(uuid);
+
+            if (imgSrc != null)
+            {
+                event_image = new Image
+                {
+                    //Source = ImageSource.FromStream(() => stream),
+                    Source = imgSrc,
+                    BackgroundColor = Color.Gray
+                };
+
+                imageView.Source = event_image.Source;
+            }
+        }
+
         private void BackToList()
         {
             this.__event = null;
@@ -178,7 +237,26 @@ namespace AgroMap
 
         private void Btn_cancel_Clicked(object sender, EventArgs e)
         {
+            imageView.Source = null;
+            event_image = null;
+            
+            var photo_uuid = InspectionService.GetNextID();
+            if (__event == null && hasPhoto)
+            {
+                PhotoService.DeleteFile(photo_uuid);
+            }
+            hasPhoto = false;
             BackToList();
+        }
+
+        private async void btn_gallery_Clicked(object sender, EventArgs e)
+        {
+            hasPhoto = true;
+            string uuid = null;
+            if (__event != null)
+                uuid = __event.uuid;
+            ImageSource imgSrc = await PhotoService.AddPhoto(uuid);
+            imageView.Source = imgSrc;
         }
 
     }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AgroMap.Database;
+using AgroMap.Services;
+using Android;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +18,20 @@ namespace AgroMap
         public MainScreenDetail()
         {
             InitializeComponent();
+        }
+
+        private void btn_upload_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                DependencyService.Get<IFilePicker>().DeleteDirectory();
+                EventDAO.DeleteFromInspection(1);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

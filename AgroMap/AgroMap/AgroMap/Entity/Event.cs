@@ -18,6 +18,5 @@ namespace AgroMap.Entity
         public DateTime last_edit_at { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
-        public int synced { get; set; } = 0; // Não sincronizado: 0 / Sincronizado: 1
     }
 }

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AgroMap.NewEventScreen">
     <ContentPage.Content>
-        <StackLayout
+        <ScrollView>
+            <StackLayout
             Orientation="Vertical"
             Padding="10"
             >
@@ -55,7 +56,20 @@
                        FontSize="20"
                        />
             </StackLayout>
-           
+            <StackLayout Orientation="Horizontal">
+                <Image x:Name="imageView"
+                       WidthRequest="50"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                    <Button x:Name="btn_gallery"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="btn_gallery_Clicked"
+                        TextColor="#FFF"
+                        BackgroundColor="#42cbdd"
+                        VerticalOptions="Center"
+                        />
+                </StackLayout>
+
             <StackLayout Orientation="Horizontal">
                 <Button x:Name="btn_save"
                         HorizontalOptions="FillAndExpand"
@@ -73,6 +87,7 @@
                         />
             </StackLayout>
 
-        </StackLayout>
+        </StackLayout>            
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

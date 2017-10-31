@@ -74,6 +74,8 @@ namespace AgroMap
                 if (!await InspectionService.SetDeviceUUID())
                 {
                     await DisplayAlert(Strings.Error, Strings.ErrorDeviceUUID, Strings.OK);
+                    UserService.Logout();
+                    HideAnimation();
                     return;
                 }
                 Navigation.InsertPageBefore(new MainScreen(), this);

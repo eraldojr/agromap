@@ -9,8 +9,9 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-  <application android:label="AgroMap.Android" android:icon="@drawable/logoicon">
-    <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCCBncUJF9IoGp4ZsMigohCscHl28zsZ20" />
-    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-  </application>
+	<uses-permission android:name="android.permission.CAMERA" />
+	<application android:label="AgroMap.Android">
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCCBncUJF9IoGp4ZsMigohCscHl28zsZ20" />
+		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+	</application>
 </manifest>

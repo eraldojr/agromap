@@ -31,8 +31,7 @@ namespace AgroMap
 
         }
 
-        override
-        protected void OnAppearing()
+        protected override void OnAppearing()
         {
             LoadInspections();
         }
@@ -41,6 +40,7 @@ namespace AgroMap
         {
             lbl_inspections.Text = Strings.AvailableInspections;
             btn_cancel_sync.Text = Strings.CancelSync;
+            btn_create.Text = Strings.NewInspection;
 
             if (UserService.LoadUserSession().Level == 0)
                 ShowSuperOptions();
@@ -86,7 +86,6 @@ namespace AgroMap
             isRefreshing = false;
             HideAnimation();
         }
-
 
         // Quando toca um item da list_view, vai para seus eventos
         private async void ListView_Tapped(object sender, ItemTappedEventArgs e)

@@ -28,6 +28,8 @@ namespace AgroMap.Droid
 		{
 			global::PCLCrypto.Resource.String.ApplicationName = global::AgroMap.Droid.Resource.String.ApplicationName;
 			global::PCLCrypto.Resource.String.Hello = global::AgroMap.Droid.Resource.String.Hello;
+			global::PCLStorage.Resource.String.ApplicationName = global::AgroMap.Droid.Resource.String.ApplicationName;
+			global::PCLStorage.Resource.String.Hello = global::AgroMap.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::AgroMap.Droid.Resource.Attribute.actionBarSize;
 		}
 		

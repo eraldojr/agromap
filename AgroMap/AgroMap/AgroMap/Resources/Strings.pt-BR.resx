@@ -373,4 +373,7 @@
   <data name="MustBeCreatorOrSupervisor" xml:space="preserve">
     <value>Necessário ser criador do evento ou supervisor da inspeção.</value>
   </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
 </root>

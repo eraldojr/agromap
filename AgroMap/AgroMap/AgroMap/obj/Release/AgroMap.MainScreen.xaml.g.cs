@@ -11,17 +11,17 @@
 namespace AgroMap {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Users\\Eraldo\\Dropbox\\IFSP\\6-Semestre\\PRJ\\Projeto\\agromap\\AgroMap\\AgroMap\\AgroM" +
-        "ap\\MainScreen.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Users\\jrfx\\Dropbox\\IFSP\\6-Semestre\\PRJ\\Projeto\\agromap\\AgroMap\\AgroMap\\AgroMap" +
+        "\\MainScreen.xaml")]
     public partial class MainScreen : global::Xamarin.Forms.MasterDetailPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::AgroMap.MainScreenMaster MasterPage;
+        private global::AgroMap.MainScreenMaster @__masterPage;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(MainScreen));
-            MasterPage = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::AgroMap.MainScreenMaster>(this, "MasterPage");
+            @__masterPage = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::AgroMap.MainScreenMaster>(this, "__masterPage");
         }
     }
 }

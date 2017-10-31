@@ -1,6 +1,4 @@
-﻿using System;
-using Android.OS;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using AgroMap.Droid;
 using System.IO;
 
@@ -8,13 +6,13 @@ using System.IO;
 
 namespace AgroMap.Droid
 {
-        public class FileHelper: IFileHelper
+    public class FileHelper: IFileHelper
+    {
+        public string GetLocalFilePath(string filename)
         {
-            public string GetLocalFilePath(string filename)
-            {
-                string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-                return Path.Combine(path, filename);
-            }
+            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            return Path.Combine(path, filename);
         }
+    }
 }
     

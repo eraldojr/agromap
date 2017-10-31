@@ -34,52 +34,62 @@ namespace AgroMap.Services
 
         // Sincroniza as inspeções e eventos com o server
         // 1 - Busca todas as inspeções do server
-        // 2 - Envia eventos não sincronizados para o server
-        // 3 - Obtém os eventos do server e salva no armazenamento local
+        // 2 - Envia eventos não sincronizados para o server e faz upload de fotos
+        // 3 - Exclui os eventos do armazenamento local
         public static async Task<Boolean> SyncWithServer(CancellationToken token)
         {
             try
             {
+                // Token de cancelamento de tarefa
                 if (token.IsCancellationRequested)
                     return false;
-                List<Inspection> inspections = await GetInspectionsFromServer(); // 1 - Obtém as inspeções
+
+                // 1 - Obtém as inspeções
+                List<Inspection> inspections = await GetInspectionsFromServer(); 
                 if (inspections == null)
                 {
                     Debug.WriteLine("AGROMAP|InspectionService.cs|SyncWithServer - Inspections Null");
                     return false;
                 }
+
+                // Token de cancelamento de tarefa
                 if (token.IsCancellationRequested)
                     return false;
+
                 // Salva as inspeções no armazenamento local{
                 if (!await InspectionDAO.SaveInLocalStorage(inspections))
                 {
                     Debug.WriteLine("AGROMAP|InspectionService.cs|SyncWithServer - Erro ao salvar inspecoes");
                     return false;
                 }
+
+                // Token de cancelamento de tarefa
                 if (token.IsCancellationRequested)
                     return false;
 
-                List<Event> unsynced_events = new List<Event>();
+                List<Event> events = new List<Event>();
                 foreach (Inspection i in inspections)
                 {
-                    // 2 - Obtém lista de eventos não sincronizados, para que possam ser enviados
-                    unsynced_events = await EventDAO.GetUnsyncedByInspection(i.id);
+                    // 2 - Obtém lista de eventos para que possam ser enviados
+                    events = await EventDAO.GetEventsByInspection(i.id);
                     {
-                        // Envia lista
+                        // Token de cancelamento de tarefa
                         if (token.IsCancellationRequested)
                             return false;
-                        if (!await SendEvents(unsynced_events))
+
+                        // Envia lista e faz upload de fotos
+                        if (!await SendEvents(events))
                         {
                             Debug.WriteLine("AGROMAP|InspectionService.cs|SyncWithServer - Erro ao enviar eventos");
                             return false;
                         }
                         
-                        // 3 - Define todos os eventos eventos como sincrozinados
+                        // Token de cancelamento de tarefa
                         if (token.IsCancellationRequested)
                             return false;
-                        await EventDAO.SetSynced(unsynced_events);
-                        if (token.IsCancellationRequested)
-                            return false;
+
+                        // 3 - Exclui todos os eventos do armazenamento local
+                        await EventDAO.DeleteFromInspection(i.id);
                     }
                 }
                 return true;
@@ -271,50 +281,52 @@ namespace AgroMap.Services
         }
 
         // Envia evento novo para o servidor
-        public async static Task<Boolean> SendEvent(Event e)
-        {
-            HttpResponseMessage response = null;
-            GetHttpClient();
 
-            var json = new JObject();
-            try
-            {
-                json.Add("user", UserService.GetLoggedUserId());
-                json.Add("id", e.uuid);
-                json.Add("inspection", e.inspection);
-                json.Add("kind", e.kind);
-                json.Add("description", e.description);
-                json.Add("latitude", e.latitude);
-                json.Add("longitude", e.longitude);
+        //public async static Task<Boolean> SendEvent(Event e)
+        //{
+        //    HttpResponseMessage response = null;
+        //    GetHttpClient();
 
-                MultipartFormDataContent form = new MultipartFormDataContent();
-                form.Add(new StringContent(json.ToString()), "event");
+        //    var json = new JObject();
+        //    try
+        //    {
+        //        json.Add("user", UserService.GetLoggedUserId());
+        //        json.Add("id", e.uuid);
+        //        json.Add("inspection", e.inspection);
+        //        json.Add("kind", e.kind);
+        //        json.Add("description", e.description);
+        //        json.Add("latitude", e.latitude);
+        //        json.Add("longitude", e.longitude);
 
-                StringContent content = new StringContent(form.ToString(), Encoding.UTF8, "application/json");
+        //        MultipartFormDataContent form = new MultipartFormDataContent();
+        //        form.Add(new StringContent(json.ToString()), "event");
 
-                response = await httpClient.PostAsync(Strings.ServerURICreateEvent, form);
+        //        StringContent content = new StringContent(form.ToString(), Encoding.UTF8, "application/json");
 
-                if (response.IsSuccessStatusCode)
-                {
+        //        response = await httpClient.PostAsync(Strings.ServerURICreateEvent, form);
 
-                    return true;
-                }
-                var responseContent = await response.Content.ReadAsStringAsync();
-                return false;
-            }
-            catch (TaskCanceledException ex)
-            {
-                Debug.WriteLine("AGROMAP|InspectionService.cs|SendEvent - Timeout: " + ex.Message);
-                return false;
-            }
-            catch (Exception err)
-            {
-                Debug.WriteLine("AGROMAP|InspectionService.cs|CreateEvent: " + err.Message);
-                return false;
-            }
-        }
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            PhotoService.UploadFile(e.uuid);
+        //            return true;
+        //        }
+        //        //var responseContent = await response.Content.ReadAsStringAsync();
+        //        return false;
+        //    }
+        //    catch (TaskCanceledException ex)
+        //    {
+        //        Debug.WriteLine("AGROMAP|InspectionService.cs|SendEvent - Timeout: " + ex.Message);
+        //        return false;
+        //    }
+        //    catch (Exception err)
+        //    {
+        //        Debug.WriteLine("AGROMAP|InspectionService.cs|CreateEvent: " + err.Message);
+        //        return false;
+        //    }
+        //}
 
         // Envia lista de eventos para o servidor
+
         public async static Task<Boolean> SendEvents(List<Event> events)
         {
             if (events.Count == 0)
@@ -324,6 +336,7 @@ namespace AgroMap.Services
 
             try
             {
+                //Serializa eventos em formato JSON
                 var json_list = JsonConvert.SerializeObject(events);
                     
                 MultipartFormDataContent form = new MultipartFormDataContent();
@@ -335,9 +348,12 @@ namespace AgroMap.Services
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return true;
+                    // Se retornar sucesso, os eventos foram enviados
+                    // Então começa a enviar as fotos
+                    if( await UploadPhotos(events))
+                        return true;
                 }
-                var responseContent = await response.Content.ReadAsStringAsync();
+                
                 return false;
             }
             catch (TaskCanceledException ex)
@@ -352,11 +368,41 @@ namespace AgroMap.Services
             }
         }
 
+        // Envia as fotos
+        private static async Task<bool> UploadPhotos(List<Event> events)
+        {
+            int max = 0; // Índice da última foto enviada
+            try
+            {
+                // Para cada evento, envia sua foto
+                for (int i = 0; i < events.Count; i++)
+                {
+                    if (!await PhotoService.UploadFile(events[i].uuid))
+                        return false;
+                    max = i;
+                }
+                return true;
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine("AGROMAP|InspectionService.cs|UploadPhotos(): " + err.Message);
+                
+                // Se chegou aqui, aconteceu um erro, ou foi cancelado pelo usuário
+                // Faz um loop até o índice que foi enviado com sucesso
+                // e exclui os que já foram enviados
+                for (int i = 0; i < events.Count; i++)
+                {
+                    EventDAO.Delete(events[i].uuid);
+                }
+                return false;
+            }
+        }
+
         // Solicita ao server o UUID que será utilizado para compor as PKs dos eventos
         // Armazena em 'Shared Preferences'
         public static async Task<Boolean> SetDeviceUUID()
         {
-            if (!GetDeviceUUID().Equals(""))
+            if (!GetDeviceUUID().Equals("") && GetDeviceUUID() != null)
                 return true;
             GetHttpClient();
             
@@ -372,14 +418,15 @@ namespace AgroMap.Services
                     uuid = data["UUID"].Value<string>();
                     AppSettings.AddOrUpdateValue("max_id", 0);
                     AppSettings.AddOrUpdateValue("uuid", uuid);
+                    return true;
                 }   
             }
             catch (Exception e)
             {
                 Debug.WriteLine("AGROMAP|InspectionService.cs|SetDeviceUUID: " + e.Message);
-                return false;
             }
-            return true;
+            return false;
+            
         }
 
         public static string GetDeviceUUID()
@@ -396,11 +443,11 @@ namespace AgroMap.Services
 
         }
 
+        // Retorna novo id de evento
         public static int GetMaxID()
         {
             try
             {
-                var x =AppSettings.GetValueOrDefault("max_id", 0);
                 int id = AppSettings.GetValueOrDefault("max_id", 0);
                 AppSettings.AddOrUpdateValue("max_id", id + 1);
                 return id;
@@ -413,6 +460,40 @@ namespace AgroMap.Services
 
         }
 
+        // Retorna novo id de evento, a diferença é que este não incrementa o valor do último ID salvo
+        // Ou seja, o método anterior retorna o novo ID e já o salva como último ID, este apenas retorna
+        public static string GetNextID()
+        {
+            try
+            {
+                int id = AppSettings.GetValueOrDefault("max_id", 0);
+                return GetDeviceUUID() + id.ToString();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("AGROMAP|InspectionService.cs|GetNextID: " + e.Message);
+                return "";
+            }
+
+        }
+
+        // Retorna id do ultimo evento criado
+        public static string GetLastID()
+        {
+            try
+            {
+                int id = AppSettings.GetValueOrDefault("max_id", 0);
+                return GetDeviceUUID() + (id - 1).ToString();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("AGROMAP|InspectionService.cs|GetLastID: " + e.Message);
+                return "";
+            }
+
+        }        
+
+        // Retorna objeto http para conexão
         private static HttpClient GetHttpClient()
         {
             httpClient = new HttpClient();
@@ -422,10 +503,13 @@ namespace AgroMap.Services
             return httpClient;
         }
 
+        // Método chamado a partir da tela InspectionScreen, para cancelar sincronização
         public static void DisposeHTTPCLient()
         {
+            httpClient.CancelPendingRequests();
             httpClient.Dispose();
         }
 
     }
 }
+
