@@ -80,7 +80,7 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AKIAI3PMR5WMUO44XBCA.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string AWS_ACCESS_KEY_ID {
             get {
@@ -98,7 +98,7 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to us-east-2:65688d83-bb43-4a82-80fd-56de0731d99e.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string AWS_COGNITO_POOL_ID {
             get {
@@ -107,7 +107,7 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to o6rlCRLyVrDIJ8H06TyIxFkgkyCoExwbGA+HKIyr.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string AWS_SECRET_ACCESS_KEY {
             get {

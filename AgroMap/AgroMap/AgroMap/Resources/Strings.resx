@@ -380,10 +380,10 @@
     <value>Must be the creator of this event or supervisor of this inspection.</value>
   </data>
   <data name="AWS_ACCESS_KEY_ID" xml:space="preserve">
-    <value>AKIAI3PMR5WMUO44XBCA</value>
+    <value />
   </data>
   <data name="AWS_SECRET_ACCESS_KEY" xml:space="preserve">
-    <value>o6rlCRLyVrDIJ8H06TyIxFkgkyCoExwbGA+HKIyr</value>
+    <value />
   </data>
   <data name="S3_Bucket" xml:space="preserve">
     <value>agromapproject</value>
@@ -392,7 +392,7 @@
     <value>agromapproject</value>
   </data>
   <data name="AWS_COGNITO_POOL_ID" xml:space="preserve">
-    <value>us-east-2:65688d83-bb43-4a82-80fd-56de0731d99e</value>
+    <value />
   </data>
   <data name="LocationNotGranted" xml:space="preserve">
     <value>Location permission not granted.</value>
