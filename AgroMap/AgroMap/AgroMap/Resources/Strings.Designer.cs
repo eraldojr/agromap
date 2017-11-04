@@ -80,15 +80,6 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string AWS_ACCESS_KEY_ID {
-            get {
-                return ResourceManager.GetString("AWS_ACCESS_KEY_ID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to agromapproject.
         /// </summary>
         internal static string AWS_BUCKET_NAME {
@@ -98,20 +89,11 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to us-east-2:65688d83-bb43-4a82-80fd-56de0731d99e.
         /// </summary>
         internal static string AWS_COGNITO_POOL_ID {
             get {
                 return ResourceManager.GetString("AWS_COGNITO_POOL_ID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string AWS_SECRET_ACCESS_KEY {
-            get {
-                return ResourceManager.GetString("AWS_SECRET_ACCESS_KEY", resourceCulture);
             }
         }
         
@@ -373,6 +355,15 @@ namespace AgroMap.Resources {
         internal static string Last_name {
             get {
                 return ResourceManager.GetString("Last_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last sync on: .
+        /// </summary>
+        internal static string LastSyncOn {
+            get {
+                return ResourceManager.GetString("LastSyncOn", resourceCulture);
             }
         }
         
@@ -746,7 +737,7 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://murmuring-fjord-35648.herokuapp.com/.
+        ///   Looks up a localized string similar to http://192.168.0.3:8000/.
         /// </summary>
         internal static string ServerURL {
             get {
@@ -823,6 +814,24 @@ namespace AgroMap.Resources {
         internal static string SuccessSignup {
             get {
                 return ResourceManager.GetString("SuccessSignup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sync.
+        /// </summary>
+        internal static string Sync {
+            get {
+                return ResourceManager.GetString("Sync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Syncing.
+        /// </summary>
+        internal static string Syncing {
+            get {
+                return ResourceManager.GetString("Syncing", resourceCulture);
             }
         }
         
@@ -913,6 +922,24 @@ namespace AgroMap.Resources {
         internal static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome!.
+        /// </summary>
+        internal static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More at: github.com/eraldojr/agromap.
+        /// </summary>
+        internal static string WelcomeText {
+            get {
+                return ResourceManager.GetString("WelcomeText", resourceCulture);
             }
         }
         

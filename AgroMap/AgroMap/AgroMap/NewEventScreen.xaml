@@ -38,29 +38,31 @@
                         SelectedIndex="0"
                         />
             </StackLayout>
-            
-            <StackLayout Orientation="Vertical">
-                <Image x:Name="img_checked"
+
+                <StackLayout Orientation="Vertical">
+                    <Image x:Name="img_checked"
                        HorizontalOptions="CenterAndExpand"
                        WidthRequest="50"/>
-                <ActivityIndicator
+                    <ActivityIndicator
                     x:Name="actInd_Location"
                     HorizontalOptions="CenterAndExpand"
                     Color="#125e68"
                     IsRunning="True"
                     IsVisible="True"
                     />
-                
-                <Label x:Name="lbl_location"
+
+                    <Label x:Name="lbl_location"
                        HorizontalOptions="CenterAndExpand"
                        FontSize="20"
                        />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Image x:Name="imageView"
-                       WidthRequest="50"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
+                </StackLayout>
+                <StackLayout
+                    BackgroundColor="#CCC">
+                    <Image x:Name="imageView"
+                       HorizontalOptions="Center"
+                    WidthRequest="100"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
                     <Button x:Name="btn_gallery"
                         HorizontalOptions="FillAndExpand"
                         Clicked="btn_gallery_Clicked"

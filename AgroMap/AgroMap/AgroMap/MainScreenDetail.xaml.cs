@@ -1,4 +1,5 @@
 ﻿using AgroMap.Database;
+using AgroMap.Resources;
 using AgroMap.Services;
 using Android;
 using System;
@@ -18,20 +19,10 @@ namespace AgroMap
         public MainScreenDetail()
         {
             InitializeComponent();
+            welcome.Text = Strings.Welcome;
+            txt_welcome.Text = Strings.WelcomeText;
+            img_welcome.Source = ImageSource.FromFile("@drawable/logofull.png");
         }
 
-        private void btn_upload_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                DependencyService.Get<IFilePicker>().DeleteDirectory();
-                EventDAO.DeleteFromInspection(1);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
     }
 }

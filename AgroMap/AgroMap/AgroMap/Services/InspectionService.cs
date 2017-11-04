@@ -21,6 +21,7 @@ namespace AgroMap.Services
     {
         private static int timeout_seconds = 60;
         private static HttpClient httpClient;
+        private static bool syncing = false;
 
         private static ISettings AppSettings
         {
@@ -33,70 +34,54 @@ namespace AgroMap.Services
         }
 
         // Sincroniza as inspeções e eventos com o server
-        // 1 - Busca todas as inspeções do server
-        // 2 - Envia eventos não sincronizados para o server e faz upload de fotos
-        // 3 - Exclui os eventos do armazenamento local
-        public static async Task<Boolean> SyncWithServer(CancellationToken token)
+        // 1 - Envia eventos armazenados localmente para o server e faz upload de fotos
+        // 2 - Exclui os eventos do armazenamento local
+        // 3 - Busca todas as inspeções do server
+        public static async Task<Boolean> SyncWithServer()
         {
+            if (syncing)
+                return false;
+            syncing = true;
             try
             {
-                // Token de cancelamento de tarefa
-                if (token.IsCancellationRequested)
+                // 1 - Envia eventos armazenados localmente para o server e faz upload de fotos
+                List<Event> events = await EventDAO.GetAll(); // Busca todos eventos locais
+
+                // Envia lista de eventos e faz upload de fotos
+                if (!await SendEvents(events))
+                {
+                    Debug.WriteLine("AGROMAP|InspectionService.cs|SyncWithServer - Erro ao enviar eventos");
+                    syncing = false;
                     return false;
+                }
+
+                // 2 - Exclui todos os eventos do armazenamento local
+                EventDAO.DeleteAll();
 
                 // 1 - Obtém as inspeções
                 List<Inspection> inspections = await GetInspectionsFromServer(); 
                 if (inspections == null)
                 {
                     Debug.WriteLine("AGROMAP|InspectionService.cs|SyncWithServer - Inspections Null");
+                    syncing = false;
                     return false;
                 }
-
-                // Token de cancelamento de tarefa
-                if (token.IsCancellationRequested)
-                    return false;
 
                 // Salva as inspeções no armazenamento local{
                 if (!await InspectionDAO.SaveInLocalStorage(inspections))
                 {
                     Debug.WriteLine("AGROMAP|InspectionService.cs|SyncWithServer - Erro ao salvar inspecoes");
+                    syncing = false;
                     return false;
                 }
-
-                // Token de cancelamento de tarefa
-                if (token.IsCancellationRequested)
-                    return false;
-
-                List<Event> events = new List<Event>();
-                foreach (Inspection i in inspections)
-                {
-                    // 2 - Obtém lista de eventos para que possam ser enviados
-                    events = await EventDAO.GetEventsByInspection(i.id);
-                    {
-                        // Token de cancelamento de tarefa
-                        if (token.IsCancellationRequested)
-                            return false;
-
-                        // Envia lista e faz upload de fotos
-                        if (!await SendEvents(events))
-                        {
-                            Debug.WriteLine("AGROMAP|InspectionService.cs|SyncWithServer - Erro ao enviar eventos");
-                            return false;
-                        }
-                        
-                        // Token de cancelamento de tarefa
-                        if (token.IsCancellationRequested)
-                            return false;
-
-                        // 3 - Exclui todos os eventos do armazenamento local
-                        await EventDAO.DeleteFromInspection(i.id);
-                    }
-                }
+                SetLastSyncTime();
+                syncing = false;
                 return true;
             }
             catch (Exception e)
             {
                 Debug.WriteLine("AGROMAP|InspectionService.cs|SyncWithServer: " + e.Message);
+                syncing = false;
                 return false;
             }
         }
@@ -377,7 +362,7 @@ namespace AgroMap.Services
                 // Para cada evento, envia sua foto
                 for (int i = 0; i < events.Count; i++)
                 {
-                    if (!await PhotoService.UploadFile(events[i].uuid))
+                    if (!await PhotoService.UploadFile(events[i].uuid, events[i].inspection))
                         return false;
                     max = i;
                 }
@@ -508,6 +493,36 @@ namespace AgroMap.Services
         {
             httpClient.CancelPendingRequests();
             httpClient.Dispose();
+        }
+
+        // Retorna data e hora da última sincronização
+        public static string GetLastSyncTime()
+        {
+            try
+            {
+                return AppSettings.GetValueOrDefault("last_sync", "");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("AGROMAP|InspectionService.cs|GetLastSyncTime: " + e.Message);
+                return "";
+            }
+
+        }
+
+        // Define nova data e hora da última sincronização
+        public static void SetLastSyncTime()
+        {
+            try
+            {
+                AppSettings.AddOrUpdateValue("last_sync", DateTime.Now.ToString());
+                
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("AGROMAP|InspectionService.cs|SetLastSyncTime: " + e.Message);
+            }
+
         }
 
     }

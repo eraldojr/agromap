@@ -1,6 +1,7 @@
 ﻿using AgroMap.Database;
 using AgroMap.Entity;
 using AgroMap.Resources;
+using AgroMap.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,6 +26,7 @@ namespace AgroMap
         private Event __event;
         private bool isChanging;
         private bool EventOnMap;
+        public MainScreenMaster __menu;
 
         public EventTabScreen(Inspection inspection)
         {

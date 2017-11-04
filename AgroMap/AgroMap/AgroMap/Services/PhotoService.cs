@@ -53,7 +53,7 @@ namespace AgroMap.Services
         }
 
 
-        public static async Task<bool> UploadFile(string fileName)
+        public static async Task<bool> UploadFile(string fileName, int inspection_id)
         {
             
             if (S3Client == null)
@@ -73,7 +73,7 @@ namespace AgroMap.Services
                 {
                     BucketName = Strings.AWS_BUCKET_NAME,
                     FilePath = file.Path,
-                    Key = file.Name
+                    Key = inspection_id.ToString() + "/" + file.Name
                 });
 
                 if(response.HttpStatusCode == HttpStatusCode.OK)

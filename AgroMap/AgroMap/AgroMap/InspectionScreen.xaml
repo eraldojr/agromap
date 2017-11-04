@@ -8,22 +8,37 @@
                 Padding="10"
                 x:Name="layout_main"
                 >
+
             <Label x:Name="lbl_inspections"
-                   HorizontalOptions="FillAndExpand"
-                   FontSize="25"
-                   HorizontalTextAlignment="Center"
-                   TextColor="#125e68"
-                   />
-            
-            <ActivityIndicator x:Name="actInspectionScreen" Color="Red" IsRunning="false" IsVisible="False" />
-            <Button x:Name="btn_cancel_sync"
+                HorizontalOptions="FillAndExpand"
+                FontSize="25"
+                HorizontalTextAlignment="Center"
+                TextColor="#125e68"
+                />
+
+            <StackLayout
+                HeightRequest="20"
+                Orientation="Horizontal"
+                HorizontalOptions="Center"
+                >
+                <Label x:Name="lbl_syncing"
+                       IsVisible="False"/>
+                <ActivityIndicator x:Name="actInspectionScreen"
+                               HeightRequest="20"
+                               WidthRequest="20"
+                               Color="Red"
+                               IsRunning="false"
+                               IsVisible="False" />
+            </StackLayout>
+
+            <!--<Button x:Name="btn_cancel_sync"
                     VerticalOptions="Center"
                     HorizontalOptions="FillAndExpand"
                     TextColor="#fff"
                     BackgroundColor="#f44b42"
                     IsVisible="False"
                     Clicked="btn_cancel_sync_Clicked"
-                    />
+                    />-->
             <StackLayout x:Name="super_options"
                          IsVisible="False"
                          >

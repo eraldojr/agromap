@@ -301,7 +301,7 @@
     <value>/api/inspection/update</value>
   </data>
   <data name="ServerURL" xml:space="preserve">
-    <value>https://murmuring-fjord-35648.herokuapp.com/</value>
+    <value>http://192.168.0.3:8000/</value>
     <comment>Server URL</comment>
   </data>
   <data name="ServerURLBackup" xml:space="preserve">
@@ -379,12 +379,6 @@
   <data name="MustBeCreatorOrSupervisor" xml:space="preserve">
     <value>Must be the creator of this event or supervisor of this inspection.</value>
   </data>
-  <data name="AWS_ACCESS_KEY_ID" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AWS_SECRET_ACCESS_KEY" xml:space="preserve">
-    <value />
-  </data>
   <data name="S3_Bucket" xml:space="preserve">
     <value>agromapproject</value>
   </data>
@@ -392,7 +386,7 @@
     <value>agromapproject</value>
   </data>
   <data name="AWS_COGNITO_POOL_ID" xml:space="preserve">
-    <value />
+    <value>us-east-2:65688d83-bb43-4a82-80fd-56de0731d99e</value>
   </data>
   <data name="LocationNotGranted" xml:space="preserve">
     <value>Location permission not granted.</value>
@@ -405,5 +399,20 @@
   </data>
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>
+  </data>
+  <data name="Sync" xml:space="preserve">
+    <value>Sync</value>
+  </data>
+  <data name="LastSyncOn" xml:space="preserve">
+    <value>Last sync on: </value>
+  </data>
+  <data name="Syncing" xml:space="preserve">
+    <value>Syncing</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome!</value>
+  </data>
+  <data name="WelcomeText" xml:space="preserve">
+    <value>More at: github.com/eraldojr/agromap</value>
   </data>
 </root>

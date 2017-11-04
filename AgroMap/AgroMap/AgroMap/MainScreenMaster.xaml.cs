@@ -1,8 +1,10 @@
 ﻿using AgroMap.Resources;
+using AgroMap.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -24,6 +26,18 @@ namespace AgroMap
             img_header.Source = ImageSource.FromFile("@drawable/logofull.png");
             BindingContext = new MainScreenMasterViewModel();
             ListView = MenuItemsListView;
+            this.Appearing += MainScreenMaster_Appearing;
+        }
+
+       
+
+        public void UpdateSyncLabel()
+        {
+            lbl_sync_on.Text = Strings.LastSyncOn + InspectionService.GetLastSyncTime();
+        }
+        private void MainScreenMaster_Appearing(object sender, EventArgs e)
+        {
+            lbl_sync_on.Text = Strings.LastSyncOn + InspectionService.GetLastSyncTime();
         }
 
         class MainScreenMasterViewModel : INotifyPropertyChanged
@@ -32,11 +46,11 @@ namespace AgroMap
 
             public MainScreenMasterViewModel()
             {
-                
                 MenuItems = new ObservableCollection<MainScreenMenuItem>(new[]
                 {
                     new MainScreenMenuItem { Id = 0, Title = Strings.Inspection },
-                    new MainScreenMenuItem { Id = 1, Title = Strings.Logout },
+                    new MainScreenMenuItem { Id = 1, Title = Strings.Sync },
+                    new MainScreenMenuItem { Id = 2, Title = Strings.Logout },
                 });
             }
 
@@ -46,10 +60,10 @@ namespace AgroMap
             {
                 if (PropertyChanged == null)
                     return;
-
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
             #endregion
         }
+
     }
 }

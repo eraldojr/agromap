@@ -3,15 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AgroMap.MainScreenDetail"
              Title="AgroMap">
-    <StackLayout Padding="10">
-        <Label Text="Bem vindo ao AgroMap!"/>
-        <Button x:Name="btn_upload"
-                        HorizontalOptions="FillAndExpand"
-                        Clicked="btn_upload_Clicked"
-                        Text="Upload"
-                        TextColor="#FFF"
-                        BackgroundColor="#d1a93c"
-                        VerticalOptions="Center"
-                        />
+    <StackLayout Padding="10"
+                 Orientation="Vertical"
+                 VerticalOptions="Fill">
+        <Label x:Name="welcome"               
+               HorizontalOptions="CenterAndExpand"
+               HorizontalTextAlignment="Center"
+               TextColor="#23a1b2"
+               FontSize="30"/>
+        <Image x:Name="img_welcome"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               WidthRequest="200"/>
+        <Label x:Name="txt_welcome"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="EndAndExpand"
+               HorizontalTextAlignment="Center"/>       
+
     </StackLayout>
 </ContentPage>

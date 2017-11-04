@@ -226,12 +226,14 @@ namespace AgroMap
 
         private void BackToList()
         {
-            this.__event = null;
-            this.Title = Strings.New;
-            this.ent_description.Text = "";
+            __event = null;
+            imageView.Source = null;
+            Title = Strings.New;
+            ent_description.Text = "";
+            event_image = null;
             latitude = "";
             longitude = "";
-            this.pck_kind.SelectedIndex = 0;
+            pck_kind.SelectedIndex = 0;
             __masterPage.CurrentPage = __masterPage.Children[0];
         }
 

@@ -160,6 +160,14 @@ namespace AgroMap.Database
             }
         }
 
+        // Exclui um evento pelo uuid
+        public static async void DeleteAll()
+        {
+            DropTable();
+            await CheckTable();
+
+        }
+
         // Exclui todos eventos de uma inspeção
         public static async Task<Boolean> DeleteFromInspection(int id)
         {
@@ -207,6 +215,7 @@ namespace AgroMap.Database
         //}
 
         //Verifica se a tabela existe. Se não, cria a tabela
+
         private static async Task<Boolean> CheckTable()
         {
             SQLiteAsyncConnection db = Database.GetConn();

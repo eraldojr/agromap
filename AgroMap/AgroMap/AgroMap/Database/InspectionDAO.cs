@@ -69,7 +69,7 @@ namespace AgroMap.Database
             return null;
         }
 
-        // Salva lista de inspeções no armazenamento local
+        // Exclui tabela local de inspeções e armazena a nova lista
         public static async Task<Boolean> SaveInLocalStorage(List<Inspection> inspections)
         {
 
@@ -79,15 +79,6 @@ namespace AgroMap.Database
             CheckTable();
             try
             {
-                List<Inspection> local_inspections = await GetAll();
-                foreach(Inspection local in local_inspections)
-                {
-                    var result = inspections.Where(i => i.id == local.id);
-                    if(result.Count() == 0)
-                    {
-                        await EventDAO.DeleteFromInspection(local.id);
-                    }
-                }
                 db.DropTableAsync<Inspection>().Wait();
                 db.CreateTableAsync<Inspection>().Wait();
                 foreach (Inspection i in inspections)

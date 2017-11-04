@@ -376,4 +376,19 @@
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>
   </data>
+  <data name="Sync" xml:space="preserve">
+    <value>Sincronizar</value>
+  </data>
+  <data name="LastSyncOn" xml:space="preserve">
+    <value>Sincronizado em: </value>
+  </data>
+  <data name="Syncing" xml:space="preserve">
+    <value>Sincronizando</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Bem vindo!</value>
+  </data>
+  <data name="WelcomeText" xml:space="preserve">
+    <value>Mais em: github.com/eraldojr/agromap</value>
+  </data>
 </root>

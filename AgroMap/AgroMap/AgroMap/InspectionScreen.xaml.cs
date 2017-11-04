@@ -22,11 +22,13 @@ namespace AgroMap
     {
         private CancellationTokenSource cts;
         private Boolean isRefreshing = false;
+        private MainScreenMaster __menu;
 
-        public InspectionScreen()
+        public InspectionScreen(MainScreenMaster menu)
         {
             InitializeComponent();
             InitComponents();
+            __menu = menu;
             //LoadInspections();
 
         }
@@ -39,7 +41,7 @@ namespace AgroMap
         private void InitComponents()
         {
             lbl_inspections.Text = Strings.AvailableInspections;
-            btn_cancel_sync.Text = Strings.CancelSync;
+            //btn_cancel_sync.Text = Strings.CancelSync;
             btn_create.Text = Strings.NewInspection;
 
             if (UserService.LoadUserSession().Level == 0)
@@ -50,6 +52,7 @@ namespace AgroMap
             list_view_inspections.ItemTemplate = new DataTemplate(() => { return new InspectionCell(this); });            
             Command refreshCommand = new Command(() => LoadInspections());
             list_view_inspections.RefreshCommand = refreshCommand;
+            lbl_syncing.Text = Strings.Syncing;
         }
 
         // Exibe as opções para usuários que são supervisores
@@ -64,27 +67,24 @@ namespace AgroMap
         // Se não houver conexão, exibe dados do armazenamento local
         private async void LoadInspections()
         {
-            //await EventDAO.DeleteFromId("VPT370");
             if (isRefreshing)
                 return;
             isRefreshing = true;
             ShowAnimation();
-            cts = new CancellationTokenSource();
-            if (!(await InspectionService.SyncWithServer(cts.Token)))
-            {
-                HideAnimation();
-                await DisplayAlert(Strings.Warning, Strings.CannotSync + "\n" + Strings.LoadedFromLocal, Strings.OK);
-                List<Inspection> list = await InspectionDAO.GetAll();
-                list_view_inspections.ItemsSource = list;
-                list_view_inspections.IsRefreshing = false;
-                isRefreshing = false;
-                return;
-            }
-            List<Inspection> __inspections = await InspectionDAO.GetAll();
-            list_view_inspections.ItemsSource = __inspections;
+            
+            List<Inspection> list = await InspectionDAO.GetAll();
+            list_view_inspections.ItemsSource = list;
             list_view_inspections.IsRefreshing = false;
+            
+            if (await InspectionService.SyncWithServer())
+            {
+                List<Inspection> __inspections = await InspectionDAO.GetAll();
+                list_view_inspections.ItemsSource = __inspections;
+            }
+            //list_view_inspections.IsRefreshing = false;
             isRefreshing = false;
             HideAnimation();
+            __menu.UpdateSyncLabel();
         }
 
         // Quando toca um item da list_view, vai para seus eventos
@@ -198,26 +198,18 @@ namespace AgroMap
         //Esconde animação de carregamento
         private void HideAnimation()
         {
-            btn_cancel_sync.IsVisible = false;
+            lbl_syncing.IsVisible = false;
             actInspectionScreen.IsVisible = false;
             actInspectionScreen.IsRunning = false;
-            main_layout.IsVisible = true;
         }
 
         //Exibe animação de carregamento
         private void ShowAnimation()
         {
-            btn_cancel_sync.IsVisible = true;
+            lbl_syncing.IsVisible = true;
             actInspectionScreen.IsVisible = true;
             actInspectionScreen.IsRunning = true;
-            main_layout.IsVisible = false;
         }
 
-        private void btn_cancel_sync_Clicked(object sender, EventArgs e)
-        {
-            InspectionService.DisposeHTTPCLient();
-            if (cts!=null)
-                cts.Cancel();
-        }
     }
 }

@@ -2,12 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AgroMap.MainScreenMaster"
-             Title="Master">
-  <StackLayout>
+             Title="Master"
+             >
+  <StackLayout
+      >
     <Image x:Name="img_header"
         WidthRequest="200"
            />
-    <ListView x:Name="MenuItemsListView"
+        <Label x:Name="lbl_sync_on"
+               FontSize="15"
+               HorizontalOptions="FillAndExpand"
+               HorizontalTextAlignment="Center"
+               />
+        <ListView x:Name="MenuItemsListView"
             SeparatorVisibility="None"
             HasUnevenRows="true"
             ItemsSource="{Binding MenuItems}">
