@@ -43,7 +43,7 @@
                 <StackLayout
                     Orientation="Horizontal"
                     HorizontalOptions="FillAndExpand">
-                    
+
                     <Label x:Name="lbl_end"
                            FontSize="20"
                            VerticalOptions="Center"
@@ -53,7 +53,7 @@
                                 VerticalOptions="Center"
                                 />
                 </StackLayout>
-            <StackLayout>
+                <StackLayout>
                     <Button x:Name="btn_save"
                             BackgroundColor="#23a1b2"
                             TextColor="#FFF"

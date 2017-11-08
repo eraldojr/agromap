@@ -301,7 +301,7 @@
     <value>/api/inspection/update</value>
   </data>
   <data name="ServerURL" xml:space="preserve">
-    <value>http://192.168.0.3:8000/</value>
+    <value>https://agromap.herokuapp.com/</value>
     <comment>Server URL</comment>
   </data>
   <data name="ServerURLBackup" xml:space="preserve">

@@ -737,7 +737,7 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://192.168.0.3:8000/.
+        ///   Looks up a localized string similar to https://agromap.herokuapp.com/.
         /// </summary>
         internal static string ServerURL {
             get {

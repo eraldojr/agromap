@@ -73,6 +73,8 @@ namespace AgroMap
             await Navigation.PopAsync();
         }
 
+        
+
         private async void Btn_save_Clicked(object sender, EventArgs e)
         {
             if (!VerifyFields())
@@ -85,12 +87,16 @@ namespace AgroMap
                 await DisplayAlert(Strings.Error, Strings.ToManageInspection, Strings.OK);
                 return;
             }
-            pck_end.Date.Date.ToString();
+            ShowAnimation();
+            var s = DateTime.SpecifyKind(pck_end.Date, DateTimeKind.Utc).ToLocalTime();
+            string x = s.Month.ToString() + "/" + (s.Day + 1).ToString() + "/" + s.Year.ToString() + " 11:59:59 PM";
+            var end_date = Convert.ToDateTime(x);
+
             if (inspection != null)
             {
                 inspection.name = ent_name.Text;
                 inspection.start_at = DateTime.SpecifyKind(pck_start.Date, DateTimeKind.Utc).ToLocalTime();
-                inspection.end_at = DateTime.SpecifyKind(pck_end.Date, DateTimeKind.Utc).ToLocalTime();
+                inspection.end_at = end_date;
             }
             else
             {
@@ -99,7 +105,7 @@ namespace AgroMap
                     id = 0,
                     name = ent_name.Text,
                     start_at = DateTime.SpecifyKind(pck_start.Date, DateTimeKind.Utc).ToLocalTime(),
-                    end_at = DateTime.SpecifyKind(pck_end.Date, DateTimeKind.Utc).ToLocalTime()
+                    end_at = end_date
                 };
             }
             
@@ -113,6 +119,7 @@ namespace AgroMap
             else
             {
                 await DisplayAlert(Strings.Error, Strings.UnexpectedError, Strings.OK);
+                HideAnimation();
                 return;
             }
         }

@@ -42,10 +42,6 @@
             <StackLayout x:Name="super_options"
                          IsVisible="False"
                          >
-            </StackLayout>
-            <StackLayout x:Name="main_layout"
-                         VerticalOptions="FillAndExpand"
-                         >
                 <Button
                     x:Name="btn_create"
                     BackgroundColor="#23a1b2"
@@ -53,6 +49,11 @@
                     Clicked="Btn_New_Inspection_Click"
                     IsVisible="True"
                     />
+            </StackLayout>
+            <StackLayout x:Name="main_layout"
+                         VerticalOptions="FillAndExpand"
+                         >
+     
                 <ListView x:Name="list_view_inspections"
                               IsPullToRefreshEnabled="True"
                           VerticalOptions="FillAndExpand"
