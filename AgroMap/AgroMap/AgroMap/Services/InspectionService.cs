@@ -335,10 +335,12 @@ namespace AgroMap.Services
                 {
                     // Se retornar sucesso, os eventos foram enviados
                     // Então começa a enviar as fotos
-                    if( await UploadPhotos(events))
+                    var uploadResult = false;
+                    var task = Task.Run(async () => {  uploadResult =  await UploadPhotos(events); });
+                    task.Wait();
+                    if (uploadResult)
                         return true;
                 }
-                
                 return false;
             }
             catch (TaskCanceledException ex)

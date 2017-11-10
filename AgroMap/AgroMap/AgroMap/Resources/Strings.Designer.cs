@@ -746,7 +746,7 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://murmuring-fjord-35648.herokuapp.com/.
+        ///   Looks up a localized string similar to https://agromap.herokuapp.com/.
         /// </summary>
         internal static string ServerURLBackup {
             get {

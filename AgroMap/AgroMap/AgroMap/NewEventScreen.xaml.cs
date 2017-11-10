@@ -68,7 +68,8 @@ namespace AgroMap
 
         public async void GetLocation()
         {
-            CheckLocationPermission();
+            if (!CheckLocationPermission())
+                BackToList();
 
             img_checked.IsVisible = false;
             actInd_Location.IsVisible = true;
@@ -164,12 +165,15 @@ namespace AgroMap
 
             try
             {
+                var s = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).ToLocalTime();
+                string x = s.Month.ToString() + "/" + (s.Day + 1).ToString() + "/" + s.Year.ToString() + " " + DateTime.Now.TimeOfDay;
+                var current_date = Convert.ToDateTime(x);
                 if (__event != null)
                 {
                     __event.description = ent_description.Text;
                     __event.kind = __event.kind;
                     __event.description = ent_description.Text;
-                    __event.last_edit_at = DateTime.Now;
+                    __event.last_edit_at = current_date;
                 }
                 else
                 {
@@ -178,7 +182,7 @@ namespace AgroMap
                         uuid = "",
                         inspection = this.__masterPage.inspection.id,
                         user = UserService.GetLoggedUserId(),
-                        last_edit_at = DateTime.Now,
+                        last_edit_at = current_date,
                         kind = pck_kind.SelectedItem.ToString(),
                         description = ent_description.Text,
                         latitude = latitude,

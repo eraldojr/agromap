@@ -68,7 +68,10 @@ namespace AgroMap
         private async void LoadInspections()
         {
             if (isRefreshing)
+            {
+                list_view_inspections.IsRefreshing = false;
                 return;
+            }
             isRefreshing = true;
             ShowAnimation();
             

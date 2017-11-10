@@ -305,7 +305,7 @@
     <comment>Server URL</comment>
   </data>
   <data name="ServerURLBackup" xml:space="preserve">
-    <value>https://murmuring-fjord-35648.herokuapp.com/</value>
+    <value>https://agromap.herokuapp.com/</value>
   </data>
   <data name="ShowOnMap" xml:space="preserve">
     <value>Show on map</value>
