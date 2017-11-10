@@ -166,7 +166,7 @@ namespace AgroMap
             try
             {
                 var s = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).ToLocalTime();
-                string x = s.Month.ToString() + "/" + (s.Day + 1).ToString() + "/" + s.Year.ToString() + " " + DateTime.Now.TimeOfDay;
+                string x = s.Month.ToString() + "/" + s.Day.ToString() + "/" + s.Year.ToString() + " " + DateTime.Now.TimeOfDay;
                 var current_date = Convert.ToDateTime(x);
                 if (__event != null)
                 {
