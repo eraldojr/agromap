@@ -323,7 +323,7 @@
     <value>Sucesso</value>
   </data>
   <data name="SuccessSignup" xml:space="preserve">
-    <value>Conta criada! Agora você já pode fazer o login</value>
+    <value>Conta criada! Após ser aprovado por um admin, poderá logar</value>
   </data>
   <data name="ToManageInspection" xml:space="preserve">
     <value>Para gerencia inspeções, é necessária uma conexão com internet</value>

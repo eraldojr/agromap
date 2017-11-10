@@ -62,9 +62,11 @@ namespace AgroMap
             }
             ShowAnimation();
 
+            var email = txt_email_login.Text;
+            email = email.Replace(" ", "");
             User user = new User()
             {
-                Email = txt_email_login.Text,
+                Email = email,
                 Password = txt_pass_login.Text
             };
 

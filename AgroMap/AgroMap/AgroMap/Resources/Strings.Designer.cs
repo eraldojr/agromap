@@ -809,7 +809,7 @@ namespace AgroMap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account created! Now you can login.
+        ///   Looks up a localized string similar to Account created! Once approved by an admin, you can login.
         /// </summary>
         internal static string SuccessSignup {
             get {

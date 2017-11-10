@@ -326,7 +326,7 @@
     <value>Success</value>
   </data>
   <data name="SuccessSignup" xml:space="preserve">
-    <value>Account created! Now you can login</value>
+    <value>Account created! Once approved by an admin, you can login</value>
   </data>
   <data name="ToManageInspection" xml:space="preserve">
     <value>In order, to manage inspections, a internet connection is required</value>

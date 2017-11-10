@@ -50,8 +50,8 @@ namespace AgroMap
             {
                 UserService.Logout();
                 Navigation.InsertPageBefore(new LoginScreen(), this);
-                Navigation.RemovePage(this);
                 await Navigation.PopAsync();
+                Navigation.RemovePage(this);
             }
 
         }
