@@ -70,11 +70,13 @@ namespace AgroMap
 
             try
             {
+                var email = ent_email_signup.Text;
+                email = email.Replace(" ", "");
                 User u = new User
                 {
                     Name = ent_name_signup.Text,
                     Last_Name = ent_last_name_signup.Text,
-                    Email = ent_email_signup.Text,
+                    Email = email,
                     Password = ent_password_signup.Text
                 };
                 int response_code = await UserService.Signup(u);
